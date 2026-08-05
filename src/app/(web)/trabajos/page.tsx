@@ -5,7 +5,7 @@ import { getContact, getSocial } from "@/lib/content";
 import { pageMetadata, JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { Icon } from "@/components/site/Icons";
 import { SectionHeading, CtaBand, Breadcrumbs } from "@/components/site/Section";
-import { ProjectsGallery } from "@/components/site/ProjectsGallery";
+import { GalleryGrid, type GalleryItem } from "@/components/site/GalleryGrid";
 
 export const revalidate = 600;
 
@@ -28,7 +28,32 @@ export default async function ProjectsPage() {
     getSocial(),
   ]);
 
-  const categories = Array.from(new Set(projects.map((p) => p.category)));
+  const galleryItems: GalleryItem[] = projects.flatMap((p) => {
+    const extra = ((p.images as string[]) || []).map((url, i) => ({
+      id: `${p.id}-img-${i}`,
+      url,
+      title: p.title,
+      category: p.category,
+      description: p.description || undefined,
+    }));
+    const pair = [
+      p.beforeImage && {
+        id: `${p.id}-antes`,
+        url: p.beforeImage,
+        title: `${p.title} — antes`,
+        category: p.category,
+        description: p.description || undefined,
+      },
+      p.afterImage && {
+        id: `${p.id}-despues`,
+        url: p.afterImage,
+        title: `${p.title} — después`,
+        category: p.category,
+        description: p.description || undefined,
+      },
+    ].filter(Boolean) as GalleryItem[];
+    return [...pair, ...extra];
+  });
 
   return (
     <>
@@ -69,19 +94,7 @@ export default async function ProjectsPage() {
         </section>
       ) : (
         <section className="container-site pb-16">
-          <ProjectsGallery
-            projects={projects.map((p) => ({
-              id: p.id,
-              title: p.title,
-              category: p.category,
-              description: p.description,
-              beforeImage: p.beforeImage,
-              afterImage: p.afterImage,
-              images: (p.images as string[]) || [],
-              featured: p.featured,
-            }))}
-            categories={categories}
-          />
+          <GalleryGrid items={galleryItems} />
         </section>
       )}
 

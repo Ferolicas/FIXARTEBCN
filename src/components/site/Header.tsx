@@ -50,7 +50,7 @@ export async function Header() {
         <div className="flex items-center gap-2">
           <a
             href={`tel:${contact.phone}`}
-            className="hidden items-center gap-2 rounded-full border border-ink-950/10 bg-white/60 px-4 py-2 text-sm font-semibold text-ink-950 transition-colors hover:border-ink-600 md:inline-flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-ink-950/10 bg-white/60 px-4 py-2 text-sm font-semibold text-ink-950 transition-colors hover:border-ink-600 xl:inline-flex"
           >
             <Icon name="phone" className="h-4 w-4 text-accent-500" />
             {contact.phoneDisplay}

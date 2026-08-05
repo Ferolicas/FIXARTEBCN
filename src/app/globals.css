@@ -154,11 +154,13 @@
 }
 
 /* Tiles del panel bento */
-.bento-tile {
-  @apply relative overflow-hidden rounded-3xl border border-ink-950/5 bg-white p-6 transition-all duration-300;
-}
-.bento-tile:hover {
-  @apply -translate-y-1 shadow-xl shadow-ink-950/10;
+@layer components {
+  .bento-tile {
+    @apply relative overflow-hidden rounded-3xl border border-ink-950/5 bg-white p-6 transition-all duration-300;
+  }
+  .bento-tile:hover {
+    @apply -translate-y-1 shadow-xl shadow-ink-950/10;
+  }
 }
 .bento-tile::after {
   content: "";

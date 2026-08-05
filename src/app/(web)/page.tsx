@@ -7,6 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 import { Icon } from "@/components/site/Icons";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading, CtaBand } from "@/components/site/Section";
+import { MotionLinkGrid } from "@/components/site/MotionLinkGrid";
 
 export const revalidate = 600;
 
@@ -54,7 +55,7 @@ export default async function HomePage() {
             <path fill="#0f2438" opacity=".92" d="M0 300 L0 272 Q360 232 720 262 T1440 255 L1440 300 Z" />
           </svg>
 
-          <div className="relative grid gap-10 px-6 pb-40 pt-12 sm:px-12 sm:pb-48 sm:pt-16 lg:grid-cols-[1.25fr_1fr] lg:gap-6">
+          <div className="relative grid gap-10 px-6 pb-60 pt-12 sm:px-12 sm:pb-48 sm:pt-16 lg:grid-cols-[1.25fr_1fr] lg:gap-6">
             <div>
               <p className="slash-label">{home.heroKicker}</p>
               <h1 className="mt-5 max-w-2xl text-5xl leading-[1.04] sm:text-6xl lg:text-[4.4rem]">
@@ -142,38 +143,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* PANEL BENTO */}
+      {/* PANEL DE ACCESOS (galería animada de opciones) */}
       <section className="container-site py-14 sm:py-16" aria-label="Accesos rápidos">
-        <Reveal>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {BENTO.map((b) => (
-              <Link
-                key={b.href}
-                href={b.href}
-                className={`bento-tile group ${b.featured ? "!border-ink-950 bg-ink-950" : ""}`}
-              >
-                <span
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
-                    b.featured ? "bg-accent-500 text-white" : "bg-cream-100 text-accent-600"
-                  }`}
-                >
-                  <Icon name={b.icon} className="h-5 w-5" />
-                </span>
-                <h2 className={`mt-4 font-display text-xl font-semibold ${b.featured ? "text-white" : "text-ink-950"}`}>
-                  {b.title}
-                </h2>
-                <p className={`mt-1 text-sm leading-snug ${b.featured ? "text-ink-100" : "text-ink-700"}`}>{b.text}</p>
-                <span
-                  className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest ${
-                    b.featured ? "text-accent-400" : "text-accent-600"
-                  }`}
-                >
-                  Entrar <Icon name="arrow-right" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </Reveal>
+        <MotionLinkGrid items={BENTO} columns={4} />
       </section>
 
       {/* SERVICIOS */}
@@ -189,22 +161,18 @@ export default async function HomePage() {
               Ver todos <Icon name="arrow-right" className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.slice(0, 6).map((s, i) => (
-              <Reveal key={s.id} delay={i * 60}>
-                <Link href={`/servicios/${s.slug}`} className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-950/10">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent-50 text-accent-600">
-                    <Icon name={s.icon} className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-4 text-xl">{s.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{s.shortDesc}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-accent-600">
-                    Más información
-                    <Icon name="arrow-right" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="mt-10">
+            <MotionLinkGrid
+              columns={3}
+              items={services.slice(0, 6).map((s) => ({
+                href: `/servicios/${s.slug}`,
+                icon: s.icon,
+                title: s.title,
+                text: s.shortDesc,
+                cta: "Más información",
+                image: s.image,
+              }))}
+            />
           </div>
         </div>
       </section>
