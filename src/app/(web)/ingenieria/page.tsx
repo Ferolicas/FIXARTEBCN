@@ -44,7 +44,7 @@ export default async function EngineeringPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section className="bg-cream-50 py-14 sm:py-16">
         <div className="container-site">
           <SectionHeading kicker="Capacidades" title="Qué aportamos a tu proyecto" center />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">

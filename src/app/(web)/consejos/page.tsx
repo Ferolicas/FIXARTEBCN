@@ -91,7 +91,7 @@ export default async function TipsPage() {
       </section>
 
       {/* CONSEJOS */}
-      <section className="bg-white py-14 sm:py-16" aria-labelledby="consejos-title">
+      <section className="bg-cream-50 py-14 sm:py-16" aria-labelledby="consejos-title">
         <div className="container-site">
           <SectionHeading
             kicker="Blog de mantenimiento"

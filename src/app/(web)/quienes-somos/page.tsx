@@ -37,7 +37,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section className="bg-cream-50 py-14 sm:py-16">
         <div className="container-site grid gap-4 md:grid-cols-2">
           <Reveal>
             <div className="card h-full border-l-4 !border-l-accent-500 p-7">

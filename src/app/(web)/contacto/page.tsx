@@ -94,7 +94,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section className="bg-cream-50 py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <h2 className="text-3xl">Escríbenos</h2>

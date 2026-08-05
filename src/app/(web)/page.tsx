@@ -39,77 +39,110 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-ink-950">
-        <div aria-hidden className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-ink-600/25 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-accent-500/15 blur-3xl" />
-        <div className="container-site relative grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.2fr_1fr] lg:py-24">
-          <div>
-            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent-400">
-              <Icon name="sparkles" className="h-3.5 w-3.5" />
-              {home.heroKicker}
-            </p>
-            <h1 className="text-4xl leading-tight text-white sm:text-5xl lg:text-[3.4rem]">
-              {home.heroTitle}
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-100">{home.heroText}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/presupuesto" className="btn-primary">
-                <Icon name="file-text" className="h-4 w-4" /> Solicitar presupuesto
-              </Link>
-              <a href={`tel:${contact.phone}`} className="btn bg-white text-ink-900 hover:bg-cream-100">
-                <Icon name="phone" className="h-4 w-4" /> Llamar ahora
-              </a>
-              <a
-                href={waLink(contact.whatsapp, "Hola, quiero pedir un presupuesto a FixArte BCN")}
-                target="_blank"
-                rel="noopener"
-                className="btn-wa"
-              >
-                <Icon name="whatsapp" className="h-4 w-4" /> WhatsApp
-              </a>
+      {/* HERO editorial */}
+      <section className="container-site pt-4 sm:pt-6">
+        <div className="hero-panel relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem]">
+          {/* Siluetas de montaña */}
+          <svg
+            viewBox="0 0 1440 300"
+            preserveAspectRatio="xMidYMax slice"
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-56 w-full sm:h-72"
+          >
+            <path fill="#8b98a9" opacity=".45" d="M0 210 L190 110 L350 200 L540 80 L710 195 L910 120 L1110 205 L1300 140 L1440 205 L1440 300 L0 300 Z" />
+            <path fill="#5d7089" opacity=".5" d="M0 250 L230 165 L430 240 L650 150 L870 245 L1090 175 L1290 245 L1440 195 L1440 300 L0 300 Z" />
+            <path fill="#0f2438" opacity=".92" d="M0 300 L0 272 Q360 232 720 262 T1440 255 L1440 300 Z" />
+          </svg>
+
+          <div className="relative grid gap-10 px-6 pb-40 pt-12 sm:px-12 sm:pb-48 sm:pt-16 lg:grid-cols-[1.25fr_1fr] lg:gap-6">
+            <div>
+              <p className="slash-label">{home.heroKicker}</p>
+              <h1 className="mt-5 max-w-2xl text-5xl leading-[1.04] sm:text-6xl lg:text-[4.4rem]">
+                {home.heroTitle}
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-900/80">{home.heroText}</p>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link href="/presupuesto" className="btn-primary">
+                  Solicitar presupuesto
+                </Link>
+                <a href={`tel:${contact.phone}`} className="btn bg-white/90 text-ink-950 backdrop-blur hover:bg-white">
+                  <Icon name="phone" className="h-4 w-4" /> {contact.phoneDisplay}
+                </a>
+                <a
+                  href={waLink(contact.whatsapp, "Hola, quiero pedir un presupuesto a FixArte BCN")}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="WhatsApp"
+                  title="WhatsApp"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-wa text-white shadow-lg shadow-wa/30 transition-transform hover:scale-105"
+                >
+                  <Icon name="whatsapp" className="h-5.5 w-5.5" />
+                </a>
+              </div>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-100">
-              <li className="flex items-center gap-2">
-                <Icon name="check" className="h-4 w-4 text-accent-400" /> Presupuesto sin compromiso
-              </li>
-              <li className="flex items-center gap-2">
-                <Icon name="check" className="h-4 w-4 text-accent-400" /> Atención de urgencias
-              </li>
-              <li className="flex items-center gap-2">
-                <Icon name="check" className="h-4 w-4 text-accent-400" /> Barcelona · Badalona · Área metropolitana
-              </li>
-            </ul>
+
+            {/* Tarjeta flotante */}
+            <div className="hidden lg:block">
+              <div className="ml-auto max-w-sm rounded-[1.75rem] bg-white/92 p-6 shadow-2xl shadow-ink-950/15 backdrop-blur">
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    ["Electricidad", "/servicios/electricista-barcelona"],
+                    ["Fontanería", "/servicios/fontanero-barcelona"],
+                    ["Pintura", "/servicios/pintores-barcelona"],
+                  ].map(([label, href]) => (
+                    <Link key={href} href={href} className="chip hover:border-accent-500">
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+                <h2 className="mt-4 text-2xl">Oficio y detalle en cada intervención</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink-700">
+                  De la avería urgente a la reforma completa, un solo equipo para todo.
+                </p>
+                <div className="mt-5 flex items-center gap-4 rounded-2xl bg-cream-100 p-4">
+                  <Image src="/logo.webp" alt="Logo de FixArte BCN" width={64} height={64} priority className="h-16 w-16 rounded-2xl" />
+                  <div>
+                    <p className="slash-label !text-[10px]">Urgencias</p>
+                    <p className="font-display text-xl font-semibold text-ink-950">
+                      Atención <em className="italic text-accent-600">prioritaria</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="relative mx-auto hidden w-full max-w-sm lg:block">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <Image
-                src="/logo.webp"
-                alt="Logo de FixArte BCN: llave inglesa, paleta de pintor y pincel"
-                width={320}
-                height={320}
-                priority
-                className="mx-auto w-full max-w-[280px] rounded-2xl"
-              />
-              <div className="mt-5 grid grid-cols-3 gap-2 text-center">
-                {[
-                  { icon: "bolt", label: "Electricidad" },
-                  { icon: "droplet", label: "Fontanería" },
-                  { icon: "paint", label: "Pintura" },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl bg-white/5 px-2 py-3">
-                    <Icon name={s.icon} className="mx-auto h-5 w-5 text-accent-400" />
-                    <p className="mt-1.5 text-[11px] font-medium text-ink-100">{s.label}</p>
-                  </div>
-                ))}
+          {/* Overlay inferior sobre la franja oscura */}
+          <div className="absolute inset-x-0 bottom-0">
+            <div className="flex flex-col gap-4 px-6 pb-6 sm:flex-row sm:items-end sm:justify-between sm:px-12 sm:pb-8">
+              <div className="max-w-xs rounded-2xl bg-[#b9977a]/90 p-5 backdrop-blur">
+                <p className="text-sm font-bold text-ink-950">Presupuestos claros, sin sorpresas</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink-950/75">
+                  Precio cerrado por escrito antes de empezar y materiales de primeras marcas.
+                </p>
+              </div>
+              <div className="flex items-center gap-6 text-white">
+                <div>
+                  <p className="font-display text-3xl font-semibold italic">24h</p>
+                  <p className="text-xs uppercase tracking-widest text-white/70">Urgencias</p>
+                </div>
+                <div className="hidden h-10 w-px bg-white/20 sm:block" />
+                <p className="max-w-[16rem] font-display text-sm font-medium uppercase leading-snug tracking-wide">
+                  Barcelona · Badalona · Área metropolitana
+                </p>
+                <Link
+                  href="/urgencias"
+                  className="text-xs font-semibold uppercase tracking-widest text-accent-400 underline underline-offset-4 hover:text-accent-500"
+                >
+                  Saber más
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PANEL BENTO: acceso rápido a todas las secciones */}
+      {/* PANEL BENTO */}
       <section className="container-site py-14 sm:py-16" aria-label="Accesos rápidos">
         <Reveal>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
@@ -117,21 +150,21 @@ export default async function HomePage() {
               <Link
                 key={b.href}
                 href={b.href}
-                className={`bento-tile group ${b.featured ? "bg-ink-950 !border-ink-950" : ""}`}
+                className={`bento-tile group ${b.featured ? "!border-ink-950 bg-ink-950" : ""}`}
               >
                 <span
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                    b.featured ? "bg-accent-500 text-white" : "bg-accent-50 text-accent-600"
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
+                    b.featured ? "bg-accent-500 text-white" : "bg-cream-100 text-accent-600"
                   }`}
                 >
-                  <Icon name={b.icon} className="h-5.5 w-5.5" />
+                  <Icon name={b.icon} className="h-5 w-5" />
                 </span>
-                <h2 className={`mt-3 font-display text-base font-bold ${b.featured ? "text-white" : "text-ink-900"}`}>
+                <h2 className={`mt-4 font-display text-xl font-semibold ${b.featured ? "text-white" : "text-ink-950"}`}>
                   {b.title}
                 </h2>
                 <p className={`mt-1 text-sm leading-snug ${b.featured ? "text-ink-100" : "text-ink-700"}`}>{b.text}</p>
                 <span
-                  className={`mt-3 inline-flex items-center gap-1 text-xs font-semibold ${
+                  className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest ${
                     b.featured ? "text-accent-400" : "text-accent-600"
                   }`}
                 >
@@ -144,8 +177,8 @@ export default async function HomePage() {
       </section>
 
       {/* SERVICIOS */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="container-site">
+      <section className="container-site pb-14 sm:pb-16">
+        <div className="rounded-[2rem] bg-cream-50 p-6 sm:rounded-[2.5rem] sm:p-12">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
               kicker="Nuestros servicios"
@@ -159,13 +192,13 @@ export default async function HomePage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {services.slice(0, 6).map((s, i) => (
               <Reveal key={s.id} delay={i * 60}>
-                <Link href={`/servicios/${s.slug}`} className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/8">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-600">
+                <Link href={`/servicios/${s.slug}`} className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-950/10">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent-50 text-accent-600">
                     <Icon name={s.icon} className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-4 text-lg">{s.title}</h3>
+                  <h3 className="mt-4 text-xl">{s.title}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{s.shortDesc}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-600">
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-accent-600">
                     Más información
                     <Icon name="arrow-right" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
@@ -177,15 +210,15 @@ export default async function HomePage() {
       </section>
 
       {/* POR QUÉ ELEGIRNOS */}
-      <section className="py-16 sm:py-20">
+      <section className="py-2 pb-14 sm:pb-16">
         <div className="container-site">
           <SectionHeading kicker="Compromiso" title={home.whyTitle} center />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {home.why.map((w, i) => (
               <Reveal key={w.title} delay={i * 50}>
-                <div className="card h-full p-6">
+                <div className="card h-full p-7">
                   <Icon name="shield" className="h-6 w-6 text-accent-500" />
-                  <h3 className="mt-3 text-base">{w.title}</h3>
+                  <h3 className="mt-3 text-lg">{w.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{w.text}</p>
                 </div>
               </Reveal>
@@ -195,16 +228,14 @@ export default async function HomePage() {
       </section>
 
       {/* URGENCIAS */}
-      <section className="container-site pb-16 sm:pb-20">
-        <div className="grid overflow-hidden rounded-3xl bg-ink-950 lg:grid-cols-2">
+      <section className="container-site pb-14 sm:pb-16">
+        <div className="grid overflow-hidden rounded-[2rem] bg-ink-950 sm:rounded-[2.5rem] lg:grid-cols-2">
           <div className="p-8 sm:p-12">
-            <p className="inline-flex items-center gap-2 rounded-full bg-red-500/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-red-400">
-              <Icon name="alert" className="h-4 w-4" /> Servicio de urgencias
-            </p>
-            <h2 className="mt-4 text-3xl text-white">Algunas averías no pueden esperar</h2>
+            <p className="slash-label !text-red-400">Servicio de urgencias</p>
+            <h2 className="mt-4 text-3xl text-white sm:text-4xl">Algunas averías no pueden esperar</h2>
             <p className="mt-3 leading-relaxed text-ink-100">{emergency.intro}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`tel:${contact.phone}`} className="btn-primary">
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href={`tel:${contact.phone}`} className="btn-dark">
                 <Icon name="phone" className="h-4 w-4" /> {contact.phoneDisplay}
               </a>
               <a
@@ -218,7 +249,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="border-t border-white/10 p-8 sm:p-12 lg:border-l lg:border-t-0">
-            <h3 className="flex items-center gap-2 text-lg text-white">
+            <h3 className="flex items-center gap-2 text-xl text-white">
               <Icon name="map-pin" className="h-5 w-5 text-accent-400" /> Zona de cobertura
             </h3>
             <ul className="mt-4 flex flex-wrap gap-2">
@@ -229,8 +260,8 @@ export default async function HomePage() {
               ))}
             </ul>
             <p className="mt-5 text-sm leading-relaxed text-ink-200">{emergency.outside}</p>
-            <Link href="/urgencias" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-400 hover:text-accent-500">
-              Más sobre urgencias y cobertura <Icon name="arrow-right" className="h-4 w-4" />
+            <Link href="/urgencias" className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-accent-400 hover:text-accent-500">
+              Más sobre urgencias <Icon name="arrow-right" className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -238,8 +269,8 @@ export default async function HomePage() {
 
       {/* CONSEJOS RECIENTES */}
       {posts.length > 0 && (
-        <section className="bg-white py-16 sm:py-20">
-          <div className="container-site">
+        <section className="container-site pb-14 sm:pb-16">
+          <div className="rounded-[2rem] bg-cream-50 p-6 sm:rounded-[2.5rem] sm:p-12">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <SectionHeading
                 kicker="Consejos útiles"
@@ -253,11 +284,11 @@ export default async function HomePage() {
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {posts.map((p, i) => (
                 <Reveal key={p.id} delay={i * 60}>
-                  <Link href={`/consejos/${p.slug}`} className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/8">
+                  <Link href={`/consejos/${p.slug}`} className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-950/10">
                     <Icon name="star" className="h-5 w-5 text-accent-400" />
-                    <h3 className="mt-3 text-lg leading-snug">{p.title}</h3>
+                    <h3 className="mt-3 text-xl leading-snug">{p.title}</h3>
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{p.excerpt}</p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-600">
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-accent-600">
                       Leer consejo
                       <Icon name="arrow-right" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
@@ -269,9 +300,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      <div className="pt-12">
-        <CtaBand phone={contact.phone} whatsapp={contact.whatsapp} />
-      </div>
+      <CtaBand phone={contact.phone} whatsapp={contact.whatsapp} />
     </>
   );
 }

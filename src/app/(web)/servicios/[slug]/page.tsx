@@ -121,7 +121,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </header>
 
-        <div className="bg-white py-12 sm:py-14">
+        <div className="bg-cream-50 py-12 sm:py-14">
           <div className="container-site grid gap-12 lg:grid-cols-[1.6fr_1fr]">
             <div className="prose-fix max-w-none" dangerouslySetInnerHTML={{ __html: mdToHtml(service.longDesc) }} />
 

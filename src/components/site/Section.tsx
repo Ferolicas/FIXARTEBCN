@@ -16,10 +16,8 @@ export function SectionHeading({
 }) {
   return (
     <div className={`max-w-2xl ${center ? "mx-auto text-center" : ""}`}>
-      {kicker && (
-        <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent-600">{kicker}</p>
-      )}
-      <Tag className={Tag === "h1" ? "text-4xl leading-tight sm:text-5xl" : "text-3xl sm:text-4xl"}>{title}</Tag>
+      {kicker && <p className="slash-label mb-3">{kicker}</p>}
+      <Tag className={Tag === "h1" ? "text-4xl leading-[1.08] sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl"}>{title}</Tag>
       {text && <p className="mt-4 text-lg leading-relaxed text-ink-700">{text}</p>}
     </div>
   );
@@ -39,7 +37,7 @@ export function CtaBand({
 }) {
   return (
     <section className="container-site pb-16 pt-4 sm:pb-20">
-      <div className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 py-12 text-center sm:px-12 sm:py-16">
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-ink-950 px-6 py-14 text-center sm:px-12 sm:py-20">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl"
@@ -48,8 +46,9 @@ export function CtaBand({
           aria-hidden
           className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ink-600/30 blur-3xl"
         />
-        <h2 className="relative text-3xl text-white sm:text-4xl">{title}</h2>
-        <p className="relative mx-auto mt-3 max-w-xl text-ink-100">{text}</p>
+        <p className="slash-label relative !text-ink-200">Presupuesto en 24h</p>
+        <h2 className="relative mt-3 text-4xl text-white sm:text-5xl">{title}</h2>
+        <p className="relative mx-auto mt-4 max-w-xl text-ink-100">{text}</p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link href="/presupuesto" className="btn-primary">
             <Icon name="file-text" className="h-4 w-4" /> Solicitar presupuesto

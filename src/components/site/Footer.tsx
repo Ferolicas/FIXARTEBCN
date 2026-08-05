@@ -25,7 +25,8 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-950 text-ink-100">
+    <footer className="px-3 pb-3 sm:px-4 sm:pb-4">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-ink-950 text-ink-100 sm:rounded-[2.5rem]">
       {/* Accesos rápidos siempre visibles en el pie */}
       <div className="border-b border-white/10">
         <div className="container-site grid grid-cols-2 gap-3 py-8 sm:grid-cols-4">
@@ -162,6 +163,7 @@ export async function Footer() {
             <li>© {year} FixArte BCN</li>
           </ul>
         </div>
+      </div>
       </div>
     </footer>
   );

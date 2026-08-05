@@ -82,7 +82,7 @@ export default async function EmergencyPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section className="bg-cream-50 py-14 sm:py-16">
         <div className="container-site">
           <SectionHeading kicker="Cómo funciona" title="Así resolvemos tu urgencia" center />
           <div className="mt-10 grid gap-4 md:grid-cols-3">

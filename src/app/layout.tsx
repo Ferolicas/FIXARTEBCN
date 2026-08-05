@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { SITE_URL, SITE_NAME } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
       <body>{children}</body>
     </html>
   );
