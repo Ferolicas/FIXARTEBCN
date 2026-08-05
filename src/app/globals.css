@@ -55,20 +55,24 @@
   .container-site {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
-  .btn {
+  .btn,
+  .btn-primary,
+  .btn-dark,
+  .btn-outline,
+  .btn-wa {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500;
   }
   .btn-primary {
-    @apply btn bg-accent-500 text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 hover:shadow-accent-600/30 active:scale-[.98];
+    @apply bg-accent-500 text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 hover:shadow-accent-600/30 active:scale-[.98];
   }
   .btn-dark {
-    @apply btn bg-ink-900 text-white hover:bg-ink-800 active:scale-[.98];
+    @apply bg-ink-900 text-white hover:bg-ink-800 active:scale-[.98];
   }
   .btn-outline {
-    @apply btn border border-ink-200 bg-white text-ink-900 hover:border-ink-600 hover:bg-ink-50 active:scale-[.98];
+    @apply border border-ink-200 bg-white text-ink-900 hover:border-ink-600 hover:bg-ink-50 active:scale-[.98];
   }
   .btn-wa {
-    @apply btn bg-wa text-white shadow-lg shadow-wa/25 hover:bg-wa-600 active:scale-[.98];
+    @apply bg-wa text-white shadow-lg shadow-wa/25 hover:bg-wa-600 active:scale-[.98];
   }
   .card {
     @apply rounded-2xl border border-cream-200 bg-white shadow-sm;
