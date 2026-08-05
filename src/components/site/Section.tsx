@@ -1,0 +1,93 @@
+import Link from "next/link";
+import { Icon } from "./Icons";
+
+export function SectionHeading({
+  kicker,
+  title,
+  text,
+  center,
+  as: Tag = "h2",
+}: {
+  kicker?: string;
+  title: string;
+  text?: string;
+  center?: boolean;
+  as?: "h1" | "h2";
+}) {
+  return (
+    <div className={`max-w-2xl ${center ? "mx-auto text-center" : ""}`}>
+      {kicker && (
+        <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent-600">{kicker}</p>
+      )}
+      <Tag className={Tag === "h1" ? "text-4xl leading-tight sm:text-5xl" : "text-3xl sm:text-4xl"}>{title}</Tag>
+      {text && <p className="mt-4 text-lg leading-relaxed text-ink-700">{text}</p>}
+    </div>
+  );
+}
+
+/** Banda final de conversión, reutilizada en casi todas las páginas. */
+export function CtaBand({
+  title = "Solicita tu presupuesto sin compromiso",
+  text = "Cuéntanos tu proyecto y te prepararemos un presupuesto personalizado, claro y sin compromiso.",
+  phone,
+  whatsapp,
+}: {
+  title?: string;
+  text?: string;
+  phone: string;
+  whatsapp: string;
+}) {
+  return (
+    <section className="container-site pb-16 pt-4 sm:pb-20">
+      <div className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 py-12 text-center sm:px-12 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ink-600/30 blur-3xl"
+        />
+        <h2 className="relative text-3xl text-white sm:text-4xl">{title}</h2>
+        <p className="relative mx-auto mt-3 max-w-xl text-ink-100">{text}</p>
+        <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link href="/presupuesto" className="btn-primary">
+            <Icon name="file-text" className="h-4 w-4" /> Solicitar presupuesto
+          </Link>
+          <a href={`tel:${phone}`} className="btn bg-white text-ink-900 hover:bg-cream-100">
+            <Icon name="phone" className="h-4 w-4" /> Llamar ahora
+          </a>
+          <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener" className="btn-wa">
+            <Icon name="whatsapp" className="h-4 w-4" /> WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Breadcrumbs({ items }: { items: { name: string; path: string }[] }) {
+  return (
+    <nav aria-label="Ruta de navegación" className="container-site pt-6">
+      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-ink-700">
+        {items.map((item, i) => {
+          const last = i === items.length - 1;
+          return (
+            <li key={item.path} className="flex items-center gap-1.5">
+              {i > 0 && <Icon name="chevron-right" className="h-3.5 w-3.5 text-ink-200" />}
+              {last ? (
+                <span aria-current="page" className="font-medium text-ink-900">
+                  {item.name}
+                </span>
+              ) : (
+                <Link href={item.path} className="hover:text-accent-600">
+                  {item.name}
+                </Link>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}

@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+
+  /* Paleta de marca (tomada del logo) */
+  --color-ink-950: #0c1f33;
+  --color-ink-900: #122b44;
+  --color-ink-800: #1b3a5c;
+  --color-ink-700: #24486f;
+  --color-ink-600: #2f5885;
+  --color-ink-200: #c4d4e5;
+  --color-ink-100: #dce7f2;
+  --color-ink-50: #eef4fa;
+
+  --color-accent-700: #c26312;
+  --color-accent-600: #d97417;
+  --color-accent-500: #ee8722;
+  --color-accent-400: #f49b3f;
+  --color-accent-100: #fbe8d2;
+  --color-accent-50: #fdf4e9;
+
+  --color-cream-200: #e9e5da;
+  --color-cream-100: #f2efe8;
+  --color-cream-50: #faf9f5;
+
+  --color-wa: #22c55e;
+  --color-wa-600: #16a34a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream-50 text-ink-900 antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight text-ink-900;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-accent-100);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500;
+  }
+  .btn-primary {
+    @apply btn bg-accent-500 text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 hover:shadow-accent-600/30 active:scale-[.98];
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 active:scale-[.98];
+  }
+  .btn-outline {
+    @apply btn border border-ink-200 bg-white text-ink-900 hover:border-ink-600 hover:bg-ink-50 active:scale-[.98];
+  }
+  .btn-wa {
+    @apply btn bg-wa text-white shadow-lg shadow-wa/25 hover:bg-wa-600 active:scale-[.98];
+  }
+  .card {
+    @apply rounded-2xl border border-cream-200 bg-white shadow-sm;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-cream-200 bg-white px-3 py-1 text-xs font-medium text-ink-700;
+  }
+  .prose-fix {
+    @apply text-ink-800 leading-relaxed;
+  }
+  .prose-fix h2 {
+    @apply mt-10 mb-3 text-2xl;
+  }
+  .prose-fix h3 {
+    @apply mt-8 mb-2 text-xl;
+  }
+  .prose-fix p {
+    @apply my-4;
+  }
+  .prose-fix ul {
+    @apply my-4 list-disc space-y-1.5 pl-6;
+  }
+  .prose-fix ol {
+    @apply my-4 list-decimal space-y-1.5 pl-6;
+  }
+  .prose-fix a {
+    @apply font-medium text-accent-600 underline underline-offset-2 hover:text-accent-700;
+  }
+  .prose-fix strong {
+    @apply font-semibold text-ink-900;
+  }
+  .prose-fix em {
+    @apply italic;
+  }
+  .prose-fix blockquote {
+    @apply my-6 border-l-4 border-accent-400 bg-accent-50 px-5 py-3 rounded-r-xl;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-ink-900;
+  }
+  .field-input {
+    @apply w-full rounded-xl border border-cream-200 bg-white px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-600/40 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
+  }
+}
+
+/* Animación de aparición (sin CLS: solo opacity/transform) */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Tiles del panel bento de la portada */
+.bento-tile {
+  @apply relative overflow-hidden rounded-2xl border border-cream-200 bg-white p-5 transition-all duration-300;
+}
+.bento-tile:hover {
+  @apply -translate-y-1 border-accent-400 shadow-xl shadow-ink-900/8;
+}
+.bento-tile::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-500), var(--color-accent-400));
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.bento-tile:hover::after {
+  opacity: 1;
+}

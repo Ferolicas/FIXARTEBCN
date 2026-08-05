@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Configuración editable desde /panel (contacto, redes, textos de páginas…)
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Service {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String // "Fontanería"
+  heroTitle       String // H1 SEO: "Fontanero en Barcelona"
+  shortDesc       String // texto de tarjeta
+  longDesc        String // markdown de la página del servicio
+  bullets         Json     @default("[]") // trabajos concretos
+  faqs            Json     @default("[]") // [{q,a}] visibles + schema FAQPage
+  icon            String   @default("wrench")
+  image           String?
+  metaTitle       String
+  metaDescription String
+  schemaType      String   @default("HomeAndConstructionBusiness")
+  order           Int      @default(0)
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  category    String   @default("General")
+  description String   @default("")
+  beforeImage String?
+  afterImage  String?
+  images      Json     @default("[]")
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String   @default("")
+  text      String
+  rating    Int      @default(5)
+  published Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Post {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String
+  excerpt         String
+  content         String // markdown
+  coverImage      String?
+  metaTitle       String   @default("")
+  metaDescription String   @default("")
+  published       Boolean  @default(true)
+  publishedAt     DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum LeadType {
+  PRESUPUESTO
+  CONTACTO
+  URGENCIA
+}
+
+enum LeadStatus {
+  NUEVO
+  EN_CURSO
+  CERRADO
+}
+
+model Lead {
+  id        Int        @id @default(autoincrement())
+  type      LeadType
+  name      String
+  phone     String
+  email     String     @default("")
+  service   String     @default("")
+  message   String
+  photos    Json       @default("[]")
+  status    LeadStatus @default(NUEVO)
+  notes     String     @default("")
+  createdAt DateTime   @default(now())
+}
