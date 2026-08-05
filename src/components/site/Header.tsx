@@ -30,7 +30,7 @@ export async function Header() {
             priority
             className="h-10 w-10 rounded-full"
           />
-          <span className="font-display text-lg font-bold text-ink-950">
+          <span className="whitespace-nowrap font-display text-lg font-bold text-ink-950">
             FixArte <span className="text-accent-600">BCN</span>
           </span>
         </Link>
