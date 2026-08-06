@@ -24,10 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = await db.service.findUnique({ where: { slug } });
   if (!service || !service.published) return {};
+  const oficio = service.title.toLowerCase();
   return pageMetadata({
     title: service.metaTitle,
     description: service.metaDescription,
     path: `/servicios/${service.slug}`,
+    // Variantes reales de búsqueda para este oficio + ciudad
+    keywords: [
+      `${oficio} barcelona`,
+      `${oficio} badalona`,
+      `${oficio} urgente barcelona`,
+      `${oficio} barato barcelona`,
+      `empresa de ${oficio} en barcelona`,
+      `presupuesto ${oficio} barcelona`,
+      ...((service.bullets as string[]) || []).slice(0, 6).map((b) => `${b.toLowerCase()} barcelona`),
+    ],
   });
 }
 
@@ -58,11 +69,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const schemas: object[] = [
     breadcrumbSchema(crumbs),
     serviceSchema({
-      name: service.heroTitle,
+      name: `${service.title} en Barcelona`,
       description: service.metaDescription,
       slug: service.slug,
       schemaType: service.schemaType,
       contact,
+      tareas: bullets,
     }),
   ];
   if (faqs.length > 0) schemas.push(faqSchema(faqs));

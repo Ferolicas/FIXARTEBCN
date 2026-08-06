@@ -28,3 +28,10 @@ public/fondo-lqip.txt
 # Originales pesados: en el repo solo van las versiones optimizadas
 public/urgencia.png
 public/ingenieria.png
+
+# Originales pesados de los fondos: las variantes comprimidas sí se suben
+public/HEROVERTICAL.png
+public/INGENIARIAVERTICAL.png
+public/URGENCIAVERTICAL.png
+public/arreglado.png
+public/averiado.png

@@ -1,38 +1,29 @@
 import sharp from "sharp";
 
-/* Las tres fotos de fondo son 16:9. En un móvil (≈0,46 de proporción) el
-   `object-cover` tiene que ampliarlas casi cuatro veces y sólo se ve un 26%
-   de su ancho: por eso la casa salía gigante. Aquí se generan variantes
-   VERTICALES en las que la escena entra entera a todo el ancho y el resto del
-   lienzo lo rellena una copia muy difuminada de la propia foto. Servidas por
-   debajo de 640px, ocupan la sección completa y se ve el 100% de la
-   panorámica. El escritorio sigue usando las horizontales de siempre.
+/* Fondos verticales para móvil (hero e ingeniería).
 
-   Uso: node scripts/fondos-movil.mjs   (requiere los originales en public/) */
+   Las fotos horizontales son 16:9 y en una pantalla de móvil (proporción
+   ≈0,46) `object-cover` tiene que ampliarlas casi cuatro veces: sólo se ve un
+   26% de su ancho y la casa sale gigante. Por eso el hero usa por debajo de
+   640px una toma vertical propia (public/HEROVERTICAL.png), donde la escena
+   ya está encuadrada en vertical y se ve la panorámica entera.
 
-const RATIO = 0.462; // 390x844: la proporción de móvil más habitual
-const ANCLA = 0.68;  // la franja nítida, algo por debajo del centro
+   Uso: node scripts/fondos-movil.mjs */
 
-const FUENTES = ["fondo", "urgencia", "ingenieria"];
+const FUENTES = [
+  { origen: "public/HEROVERTICAL.png", nombre: "hero-vertical" },
+  { origen: "public/INGENIARIAVERTICAL.png", nombre: "ingenieria-vertical" },
+  { origen: "public/URGENCIAVERTICAL.png", nombre: "urgencia-vertical" },
+];
+const ANCHOS = [480, 780, 1080];
 
-for (const nombre of FUENTES) {
-  const origen = `public/${nombre}.png`;
-  for (const ancho of [480, 780]) {
-    const alto = Math.round(ancho / RATIO);
-    const altoFoto = Math.round((ancho * 9) / 16);
-    const arriba = Math.round((alto - altoFoto) * ANCLA);
-
-    const difuminado = await sharp(origen)
-      .resize(ancho, alto, { fit: "cover", position: "center" })
-      .blur(Math.round(ancho / 10))
-      .modulate({ brightness: 1.05, saturation: 0.85 })
-      .toBuffer();
-
-    const nitida = await sharp(origen).resize(ancho, altoFoto, { fit: "cover" }).toBuffer();
-    const base = sharp(difuminado).composite([{ input: nitida, top: arriba, left: 0 }]);
-
-    await base.clone().avif({ quality: 50 }).toFile(`public/${nombre}-movil-${ancho}.avif`);
-    await base.clone().webp({ quality: 70 }).toFile(`public/${nombre}-movil-${ancho}.webp`);
-    console.log(`${nombre}-movil-${ancho}: lienzo ${ancho}x${alto}, foto nítida ${ancho}x${altoFoto} a ${arriba}px`);
+for (const { origen, nombre } of FUENTES) {
+  const meta = await sharp(origen).metadata();
+  console.log(`${origen}: ${meta.width}x${meta.height} (${(meta.width / meta.height).toFixed(3)})`);
+  for (const ancho of ANCHOS) {
+    const base = sharp(origen).resize(ancho, null, { withoutEnlargement: false });
+    await base.clone().avif({ quality: 52 }).toFile(`public/${nombre}-${ancho}.avif`);
+    await base.clone().webp({ quality: 74 }).toFile(`public/${nombre}-${ancho}.webp`);
+    console.log(`  ${nombre}-${ancho}`);
   }
 }

@@ -24,10 +24,24 @@ import { InteractiveHoverLink } from "@/components/ui/interactive-hover-button";
 export const revalidate = 600;
 
 export const metadata: Metadata = pageMetadata({
-  title: "FixArte BCN | Reformas y Mantenimiento en Barcelona",
+  title: "Fontanero en Barcelona | Electricista y Reformas · FixArte BCN",
   description:
-    "Empresa de mantenimiento, reparaciones e instalaciones en Barcelona y Badalona: electricidad, fontanería, pintura, pladur, cocinas y reformas. Presupuesto sin compromiso.",
+    "Fontanero, electricista, pintor y reformas en Barcelona y Badalona. Urgencias 24 h, presupuesto cerrado por escrito y sin compromiso. Llama al 634 39 03 45.",
   path: "/",
+  keywords: [
+    "fontanero barcelona",
+    "electricista barcelona",
+    "pintores barcelona",
+    "reformas barcelona",
+    "cambio de grifo barcelona",
+    "pintar casa barcelona",
+    "fontanero urgente barcelona",
+    "electricista 24 horas barcelona",
+    "reparaciones del hogar barcelona",
+    "manitas barcelona",
+    "fontanero badalona",
+    "electricista badalona",
+  ],
 });
 
 const PROCESO = [
@@ -129,12 +143,23 @@ export default async function LandingPage() {
 
       {/* ═══ INICIO ═══════════════════════════════════════════ */}
       <section id="inicio" className="hero-panel anchor relative flex min-h-svh flex-col overflow-hidden">
-        {/* Por debajo de 640px se sirve la variante vertical, donde la escena
-            entra entera: así se ve la panorámica completa y no un trozo
-            ampliado. De 640px en adelante, las horizontales de siempre. */}
+        {/* Por debajo de 640px se sirve la toma vertical (HEROVERTICAL.png),
+            encuadrada de origen para pantalla de móvil: se ve la panorámica
+            entera en vez de un recorte ampliado de la horizontal. De 640px en
+            adelante, las horizontales de siempre. */}
         <picture>
-          <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/fondo-movil-480.avif 480w, /fondo-movil-780.avif 780w" />
-          <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/fondo-movil-480.webp 480w, /fondo-movil-780.webp 780w" />
+          <source
+            media="(max-width: 639px)"
+            type="image/avif"
+            sizes="100vw"
+            srcSet="/hero-vertical-480.avif 480w, /hero-vertical-780.avif 780w, /hero-vertical-1080.avif 1080w"
+          />
+          <source
+            media="(max-width: 639px)"
+            type="image/webp"
+            sizes="100vw"
+            srcSet="/hero-vertical-480.webp 480w, /hero-vertical-780.webp 780w, /hero-vertical-1080.webp 1080w"
+          />
           <source
             type="image/avif"
             sizes="100vw"
@@ -290,8 +315,19 @@ export default async function LandingPage() {
         <div className="pointer-events-none absolute inset-0">
           <div className="sticky top-0 h-svh w-full">
             <picture>
-              <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/urgencia-movil-480.avif 480w, /urgencia-movil-780.avif 780w" />
-              <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/urgencia-movil-480.webp 480w, /urgencia-movil-780.webp 780w" />
+              {/* Toma vertical propia para móvil */}
+              <source
+                media="(max-width: 639px)"
+                type="image/avif"
+                sizes="100vw"
+                srcSet="/urgencia-vertical-480.avif 480w, /urgencia-vertical-780.avif 780w, /urgencia-vertical-1080.avif 1080w"
+              />
+              <source
+                media="(max-width: 639px)"
+                type="image/webp"
+                sizes="100vw"
+                srcSet="/urgencia-vertical-480.webp 480w, /urgencia-vertical-780.webp 780w, /urgencia-vertical-1080.webp 1080w"
+              />
               <source
                 type="image/avif"
                 sizes="100vw"
@@ -392,8 +428,19 @@ export default async function LandingPage() {
         <div className="pointer-events-none absolute inset-0">
           <div className="sticky top-0 h-svh w-full">
             <picture>
-              <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/ingenieria-movil-480.avif 480w, /ingenieria-movil-780.avif 780w" />
-              <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/ingenieria-movil-480.webp 480w, /ingenieria-movil-780.webp 780w" />
+              {/* Toma vertical propia para móvil */}
+              <source
+                media="(max-width: 639px)"
+                type="image/avif"
+                sizes="100vw"
+                srcSet="/ingenieria-vertical-480.avif 480w, /ingenieria-vertical-780.avif 780w, /ingenieria-vertical-1080.avif 1080w"
+              />
+              <source
+                media="(max-width: 639px)"
+                type="image/webp"
+                sizes="100vw"
+                srcSet="/ingenieria-vertical-480.webp 480w, /ingenieria-vertical-780.webp 780w, /ingenieria-vertical-1080.webp 1080w"
+              />
               <source
                 type="image/avif"
                 sizes="100vw"

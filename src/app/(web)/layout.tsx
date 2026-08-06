@@ -11,15 +11,21 @@ import { getContact, getSocial } from "@/lib/content";
 export const revalidate = 600;
 
 export default async function WebLayout({ children }: { children: React.ReactNode }) {
-  const [contact, social, services] = await Promise.all([
+  const [contact, social, services, valoraciones] = await Promise.all([
     getContact(),
     getSocial(),
     db.service.findMany({
       where: { published: true },
       orderBy: { order: "asc" },
-      select: { slug: true, title: true },
+      select: { slug: true, title: true, shortDesc: true },
     }),
+    db.testimonial.findMany({ where: { published: true }, select: { rating: true } }),
   ]);
+
+  // Sólo se declara la valoración media si hay reseñas reales publicadas
+  const valoracion = valoraciones.length
+    ? { media: valoraciones.reduce((s, t) => s + t.rating, 0) / valoraciones.length, total: valoraciones.length }
+    : null;
 
   return (
     <LegalProvider
@@ -41,7 +47,7 @@ export default async function WebLayout({ children }: { children: React.ReactNod
       >
         Saltar al contenido
       </a>
-      <JsonLd data={localBusinessSchema(contact, social)} />
+      <JsonLd data={localBusinessSchema(contact, social, { servicios: services, valoracion })} />
       <Header />
       <main id="contenido">{children}</main>
       <Footer />
