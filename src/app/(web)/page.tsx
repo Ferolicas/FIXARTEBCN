@@ -182,6 +182,10 @@ export default async function LandingPage() {
           />
         </picture>
 
+        {/* Velo casi transparente: sólo un 10% de blanco y un desenfoque mínimo,
+            lo justo para asentar el texto sin tapar la foto */}
+        <div aria-hidden className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
+
         <div className="relative mx-auto flex w-full max-w-[1180px] flex-1 items-center px-4 pt-32 sm:px-6 sm:pt-40 lg:pt-48">
           {/* En escritorio el bloque sube un 10% de su propia altura */}
           <div className="grid w-full gap-10 pb-24 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:translate-y-[-10%] lg:gap-10">
@@ -313,7 +317,7 @@ export default async function LandingPage() {
             la altura de la pantalla para conservar su proporción y acompaña el
             scroll, de modo que cubre la sección completa. */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-svh w-full">
+          <div className="h-full w-full">
             <picture>
               {/* Toma vertical propia para móvil */}
               <source
@@ -353,7 +357,7 @@ export default async function LandingPage() {
         </div>
 
         {/* La tarjeta cubre la sección entera, del mismo tamaño que la foto */}
-        <div className="relative bg-white/78 backdrop-blur-md sm:bg-white/75">
+        <div className="relative bg-white/70 backdrop-blur-[3px]">
           <div className="container-site py-16 sm:py-24">
             <div className="text-center">
               <p className="slash-gold !text-red-700">Servicio de urgencias</p>
@@ -426,7 +430,7 @@ export default async function LandingPage() {
       <section id="ingenieria" className="anchor relative overflow-hidden py-16 sm:py-24">
         {/* Mismo tratamiento que en urgencias: variante vertical en móvil */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-svh w-full">
+          <div className="h-full w-full">
             <picture>
               {/* Toma vertical propia para móvil */}
               <source
@@ -466,7 +470,7 @@ export default async function LandingPage() {
         </div>
 
         {/* Mismo velo que en urgencias: el texto se lee sin necesidad de tarjeta */}
-        <div aria-hidden className="absolute inset-0 bg-white/78 backdrop-blur-md sm:bg-white/75" />
+        <div aria-hidden className="absolute inset-0 bg-white/70 backdrop-blur-[3px]" />
 
         <div className="container-site relative">
           <div className="mx-auto max-w-3xl text-center">
