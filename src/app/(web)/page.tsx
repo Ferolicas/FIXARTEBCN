@@ -129,7 +129,12 @@ export default async function LandingPage() {
 
       {/* ═══ INICIO ═══════════════════════════════════════════ */}
       <section id="inicio" className="hero-panel anchor relative flex min-h-svh flex-col overflow-hidden">
+        {/* Por debajo de 640px se sirve la variante vertical, donde la escena
+            entra entera: así se ve la panorámica completa y no un trozo
+            ampliado. De 640px en adelante, las horizontales de siempre. */}
         <picture>
+          <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/fondo-movil-480.avif 480w, /fondo-movil-780.avif 780w" />
+          <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/fondo-movil-480.webp 480w, /fondo-movil-780.webp 780w" />
           <source
             type="image/avif"
             sizes="100vw"
@@ -148,12 +153,13 @@ export default async function LandingPage() {
             height={864}
             fetchPriority="high"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-center sm:object-center"
           />
         </picture>
 
         <div className="relative mx-auto flex w-full max-w-[1180px] flex-1 items-center px-4 pt-32 sm:px-6 sm:pt-40 lg:pt-48">
-          <div className="grid w-full gap-10 pb-24 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:gap-10">
+          {/* En escritorio el bloque sube un 10% de su propia altura */}
+          <div className="grid w-full gap-10 pb-24 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:translate-y-[-10%] lg:gap-10">
             <div>
               <h1 className="max-w-[13em] text-[clamp(1.65rem,7vw,2.6rem)] leading-[1.08] text-noir [text-wrap:normal] lg:text-[2.75rem] xl:text-[3rem]">
                 {home.heroTitle}
@@ -188,19 +194,23 @@ export default async function LandingPage() {
 
               <ul className="mt-7 grid w-fit max-w-full gap-2.5 rounded-2xl bg-white/45 px-5 py-4 backdrop-blur-sm">
                 {[
-                  /* "sin sorpresas" iba en negrita y acababa sola en la última
-                     línea, como si fuera otro punto de la lista. Va unida a la
-                     coma con un espacio duro y el reparto de líneas
-                     equilibrado, para que nunca quede descolgada. */
-                  <>Presupuesto cerrado por escrito,&nbsp;<strong className="font-bold">sin sorpresas</strong></>,
+                  /* En móvil el salto va justo detrás de "escrito,", para que
+                     la frase quede completa en la primera línea y "sin
+                     sorpresas" debajo. En escritorio cabe entera. */
+                  <>
+                    Presupuesto cerrado por escrito,
+                    <br className="sm:hidden" />
+                    <span className="hidden sm:inline"> </span>
+                    <strong className="font-bold">sin sorpresas</strong>
+                  </>,
                   <>Urgencias&nbsp;<strong className="font-bold">24 h</strong></>,
                   <>Barcelona · Badalona · Área metropolitana</>,
                 ].map((t, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2.5 text-[15.4px] font-semibold leading-snug text-black"
+                    className="flex items-start gap-2.5 text-[14px] font-semibold leading-snug text-black sm:text-[15.4px]"
                   >
-                    <span aria-hidden className="gold-rule mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full" />
+                    <span aria-hidden className="gold-rule mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full" />
                     <span className="[text-wrap:balance]">{t}</span>
                   </li>
                 ))}
@@ -274,15 +284,14 @@ export default async function LandingPage() {
 
       {/* ═══ URGENCIAS ════════════════════════════════════════ */}
       <section id="urgencias" className="anchor relative overflow-hidden">
-        {/* La foto es 16:9. Estirada a toda una sección de móvil (~980px de
-            alto y 390 de ancho) hay que ampliarla casi 3x y sólo se ve un 22%
-            de su ancho: de ahí la fachada gigante. En móvil se muestra como
-            banda superior, con una proporción parecida a la suya, y se funde
-            con el fondo; así se ve más del 60% de la foto. Desde sm la
-            pantalla ya es ancha y vuelve a cubrir la sección entera. */}
+        {/* En móvil, variante vertical con la escena entera; la caja se queda a
+            la altura de la pantalla para conservar su proporción y acompaña el
+            scroll, de modo que cubre la sección completa. */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-[42svh] w-full sm:h-svh">
+          <div className="sticky top-0 h-svh w-full">
             <picture>
+              <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/urgencia-movil-480.avif 480w, /urgencia-movil-780.avif 780w" />
+              <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/urgencia-movil-480.webp 480w, /urgencia-movil-780.webp 780w" />
               <source
                 type="image/avif"
                 sizes="100vw"
@@ -301,15 +310,14 @@ export default async function LandingPage() {
                 height={720}
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-cover object-[62%_center]"
+                className="h-full w-full object-cover object-center sm:object-[62%_center]"
               />
             </picture>
-            <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream-50 sm:hidden" />
           </div>
         </div>
 
-        {/* Velo de lectura: más ligero arriba, donde está la foto */}
-        <div className="relative bg-gradient-to-b from-white/72 via-white/90 to-white/92 backdrop-blur-md sm:bg-white/75 sm:bg-none">
+        {/* La tarjeta cubre la sección entera, del mismo tamaño que la foto */}
+        <div className="relative bg-white/78 backdrop-blur-md sm:bg-white/75">
           <div className="container-site py-16 sm:py-24">
             <div className="text-center">
               <p className="slash-gold !text-red-700">Servicio de urgencias</p>
@@ -380,11 +388,12 @@ export default async function LandingPage() {
 
       {/* ═══ INGENIERÍA ═══════════════════════════════════════ */}
       <section id="ingenieria" className="anchor relative overflow-hidden py-16 sm:py-24">
-        {/* Mismo tratamiento que en urgencias: banda superior en móvil para no
-            ampliar la foto hasta cubrir 1600px de alto */}
+        {/* Mismo tratamiento que en urgencias: variante vertical en móvil */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-[42svh] w-full sm:h-svh">
+          <div className="sticky top-0 h-svh w-full">
             <picture>
+              <source media="(max-width: 639px)" type="image/avif" sizes="100vw" srcSet="/ingenieria-movil-480.avif 480w, /ingenieria-movil-780.avif 780w" />
+              <source media="(max-width: 639px)" type="image/webp" sizes="100vw" srcSet="/ingenieria-movil-480.webp 480w, /ingenieria-movil-780.webp 780w" />
               <source
                 type="image/avif"
                 sizes="100vw"
@@ -406,15 +415,11 @@ export default async function LandingPage() {
                 className="h-full w-full object-cover"
               />
             </picture>
-            <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream-50 sm:hidden" />
           </div>
         </div>
 
-        {/* Velo de lectura: más ligero arriba, donde está la foto */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-b from-white/72 via-white/90 to-white/92 backdrop-blur-md sm:bg-white/75 sm:bg-none"
-        />
+        {/* Mismo velo que en urgencias: el texto se lee sin necesidad de tarjeta */}
+        <div aria-hidden className="absolute inset-0 bg-white/78 backdrop-blur-md sm:bg-white/75" />
 
         <div className="container-site relative">
           <div className="mx-auto max-w-3xl text-center">
