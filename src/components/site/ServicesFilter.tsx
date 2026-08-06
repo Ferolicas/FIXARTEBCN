@@ -43,7 +43,7 @@ export function ServicesFilter({
       <div
         role="group"
         aria-label="Elige un servicio"
-        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-3 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
+        className="flex flex-wrap justify-center gap-2"
       >
         {services.map((s, i) => (
           <button
@@ -51,7 +51,7 @@ export function ServicesFilter({
             type="button"
             onClick={() => setActive(i)}
             aria-pressed={i === active}
-            className="filter-chip flex shrink-0 items-center gap-2"
+            className="filter-chip flex items-center gap-2"
           >
             <GoldIcon name={s.icon} className="h-4.5 w-4.5" />
             {s.title}

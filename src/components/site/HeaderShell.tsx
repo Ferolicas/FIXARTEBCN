@@ -76,7 +76,7 @@ export function HeaderShell({ links, services, phone, phoneDisplay, whatsapp }: 
 
       {/* 2 · Fila principal */}
       <div className={overlay ? "" : "border-b border-ink-950/8"}>
-        <div className="mx-auto flex h-[116px] w-full max-w-[1400px] items-center justify-between gap-3 px-3 sm:h-[136px] sm:gap-6 sm:px-6">
+        <div className="mx-auto flex h-[84px] w-full max-w-[1400px] items-center justify-between gap-3 px-3 sm:h-[136px] sm:gap-6 sm:px-6">
           <Link href="/" className="flex shrink-0 items-center" aria-label="FixArte BCN — Inicio">
             <Image
               src="/logo.webp"
@@ -84,7 +84,7 @@ export function HeaderShell({ links, services, phone, phoneDisplay, whatsapp }: 
               width={192}
               height={192}
               priority
-              className="h-[97px] w-[97px] sm:h-[117px] sm:w-[117px]"
+              className="h-[68px] w-[68px] sm:h-[117px] sm:w-[117px]"
             />
           </Link>
 
@@ -107,30 +107,34 @@ export function HeaderShell({ links, services, phone, phoneDisplay, whatsapp }: 
             </ul>
           </nav>
 
-          {/* Acciones: presupuesto + llamar + WhatsApp */}
+          {/* Acciones: presupuesto + llamar + WhatsApp.
+              En móvil no caben junto al logo y además están duplicadas en la
+              barra fija inferior y en el menú, así que aparecen a partir de sm. */}
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <QuoteButton className="!px-4 !text-xs sm:!px-6 sm:!text-sm" text="Presupuesto" />
+            <div className="hidden shrink-0 items-center gap-1.5 sm:flex sm:gap-2">
+              <QuoteButton className="!px-4 !text-xs sm:!px-6 sm:!text-sm" text="Presupuesto" />
 
-            <InteractiveHoverLink
-              href={`tel:${phone}`}
-              aria-label={`Llamar al ${phoneDisplay}`}
-              title="Llamar ahora"
-              className="shrink-0 !px-4 !py-2.5 !text-xs sm:!px-5 sm:!text-sm"
-              leading={<Icon name="phone" className="h-4 w-4" />}
-              text="Llamar"
-            />
+              <InteractiveHoverLink
+                href={`tel:${phone}`}
+                aria-label={`Llamar al ${phoneDisplay}`}
+                title="Llamar ahora"
+                className="shrink-0 !px-4 !py-2.5 !text-xs sm:!px-5 sm:!text-sm"
+                leading={<Icon name="phone" className="h-4 w-4" />}
+                text="Llamar"
+              />
 
-            <InteractiveHoverLink
-              href={`https://wa.me/${whatsapp}`}
-              target="_blank"
-              rel="noopener"
-              aria-label="Escribir por WhatsApp"
-              title="WhatsApp"
-              variant="wa"
-              className="shrink-0 !px-4 !py-2.5 !text-xs sm:!px-5 sm:!text-sm"
-              leading={<Icon name="whatsapp" className="h-4 w-4" />}
-              text="WhatsApp"
-            />
+              <InteractiveHoverLink
+                href={`https://wa.me/${whatsapp}`}
+                target="_blank"
+                rel="noopener"
+                aria-label="Escribir por WhatsApp"
+                title="WhatsApp"
+                variant="wa"
+                className="shrink-0 !px-4 !py-2.5 !text-xs sm:!px-5 sm:!text-sm"
+                leading={<Icon name="whatsapp" className="h-4 w-4" />}
+                text="WhatsApp"
+              />
+            </div>
 
             <MobileNav links={navLinks} phone={phone} phoneDisplay={phoneDisplay} whatsapp={whatsapp} />
           </div>

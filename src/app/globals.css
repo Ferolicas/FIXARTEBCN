@@ -162,7 +162,7 @@
 
 /* Anclas: deja hueco para la cabecera fija al saltar de sección */
 .anchor {
-  scroll-margin-top: 156px;
+  scroll-margin-top: 122px; /* cinta de servicios (~38px) + fila principal (84px) */
 }
 @media (min-width: 640px) {
   .anchor { scroll-margin-top: 178px; }
@@ -200,8 +200,16 @@
 .slash-gold::after { content: " /"; }
 
 /* Botón de filtro con efecto hundido al estar activo */
+/* Chip de filtro. En móvil es algo más compacto para que quepan más por fila,
+   pero nunca baja de 44px de alto (objetivo táctil cómodo). */
 .filter-chip {
-  @apply rounded-full border border-noir/15 bg-white px-4 py-2 text-[15px] font-bold text-noir transition-all duration-200;
+  @apply rounded-full border border-noir/15 bg-white px-3.5 py-2.5 text-sm font-bold text-noir transition-all duration-200;
+  min-height: 44px;
+}
+@media (min-width: 640px) {
+  .filter-chip {
+    @apply px-4 text-[15px];
+  }
 }
 .filter-chip:hover {
   @apply border-gold-500/60;

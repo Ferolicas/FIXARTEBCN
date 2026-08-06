@@ -33,8 +33,9 @@ function Contenido({
 }) {
   return (
     <>
-      {/* Contenido en reposo */}
-      <span className="relative z-10 inline-flex items-center gap-2 whitespace-nowrap transition-all duration-300 group-hover:translate-x-10 group-hover:opacity-0">
+      {/* Contenido en reposo. En móvil puede partirse en dos líneas: es
+          preferible a que una etiqueta larga se salga del botón. */}
+      <span className="relative z-10 inline-flex items-center gap-2 text-center leading-tight transition-all duration-300 group-hover:translate-x-10 group-hover:opacity-0 sm:whitespace-nowrap">
         {leading}
         {text}
       </span>

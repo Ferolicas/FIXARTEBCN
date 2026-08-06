@@ -24,9 +24,9 @@ export function MobileNav({ links, phone, phoneDisplay, whatsapp }: Props) {
         onClick={() => setOpen(true)}
         aria-label="Abrir menú"
         aria-expanded={open}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border border-cream-200 text-ink-900"
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-noir/15 bg-white/70 text-ink-900 backdrop-blur-sm"
       >
-        <Icon name="menu" className="h-5 w-5" />
+        <Icon name="menu" className="h-6 w-6" />
       </button>
 
       {open && (

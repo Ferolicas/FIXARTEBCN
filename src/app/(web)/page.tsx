@@ -152,7 +152,7 @@ export default async function LandingPage() {
           />
         </picture>
 
-        <div className="relative mx-auto flex w-full max-w-[1180px] flex-1 items-center px-4 pt-40 sm:px-6 lg:pt-48">
+        <div className="relative mx-auto flex w-full max-w-[1180px] flex-1 items-center px-4 pt-32 sm:px-6 sm:pt-40 lg:pt-48">
           <div className="grid w-full gap-10 pb-24 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:gap-10">
             <div>
               <h1 className="max-w-[13em] text-[clamp(1.65rem,7vw,2.6rem)] leading-[1.08] text-noir [text-wrap:normal] lg:text-[2.75rem] xl:text-[3rem]">
@@ -163,16 +163,24 @@ export default async function LandingPage() {
                 <QuoteButton className="w-full sm:w-auto" text="Pedir presupuesto" />
                 <InteractiveHoverLink
                   href={`tel:${contact.phone}`}
-                  className="flex-1 !px-5 sm:flex-none"
+                  aria-label={`Llamar al ${contact.phoneDisplay}`}
+                  className="flex-1 !px-3 sm:flex-none sm:!px-5"
                   leading={<Icon name="phone" className="h-4 w-4" />}
-                  text={contact.phoneDisplay}
+                  /* El número completo no cabe junto a WhatsApp en pantallas
+                     estrechas: ahí basta con "Llamar". */
+                  text={
+                    <>
+                      <span className="sm:hidden">Llamar</span>
+                      <span className="hidden sm:inline">{contact.phoneDisplay}</span>
+                    </>
+                  }
                 />
                 <InteractiveHoverLink
                   href={waLink(contact.whatsapp, "Hola, quiero pedir un presupuesto a FixArte BCN")}
                   target="_blank"
                   rel="noopener"
                   variant="wa"
-                  className="flex-1 !px-5 sm:flex-none"
+                  className="flex-1 !px-3 sm:flex-none sm:!px-5"
                   leading={<Icon name="whatsapp" className="h-4 w-4" />}
                   text="WhatsApp"
                 />

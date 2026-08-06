@@ -62,14 +62,14 @@ export function ReviewsGrid({ reviews }: { reviews: Review[] }) {
           {media} de 5 · {reviews.length} {reviews.length === 1 ? "reseña" : "reseñas"}
         </p>
 
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:overflow-visible sm:px-0" role="group" aria-label="Ordenar reseñas">
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Ordenar reseñas">
           {ORDENES.map((o) => (
             <button
               key={o.id}
               type="button"
               onClick={() => setOrden(o.id)}
               aria-pressed={orden === o.id}
-              className="filter-chip shrink-0 !text-sm"
+              className="filter-chip !text-sm"
             >
               {o.label}
             </button>

@@ -29,13 +29,13 @@ export function WorksFilter({ services, items }: { services: WorkService[]; item
       <div
         role="group"
         aria-label="Filtrar trabajos por servicio"
-        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-3 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
+        className="flex flex-wrap justify-center gap-2"
       >
         <button
           type="button"
           onClick={() => setActive(TODOS)}
           aria-pressed={active === TODOS}
-          className="filter-chip shrink-0"
+          className="filter-chip"
         >
           Todos
         </button>
@@ -45,7 +45,7 @@ export function WorksFilter({ services, items }: { services: WorkService[]; item
             type="button"
             onClick={() => setActive(s.title)}
             aria-pressed={active === s.title}
-            className="filter-chip flex shrink-0 items-center gap-2"
+            className="filter-chip flex items-center gap-2"
           >
             <GoldIcon name={s.icon} className="h-4.5 w-4.5" />
             {s.title}

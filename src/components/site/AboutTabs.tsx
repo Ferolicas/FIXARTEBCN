@@ -44,7 +44,7 @@ export function AboutTabs({
       <div
         role="group"
         aria-label="Conoce FixArte BCN"
-        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-3 sm:mx-0 sm:justify-center sm:overflow-visible sm:px-0"
+        className="flex flex-wrap justify-center gap-2"
       >
         {tabs.map((t) => (
           <button
@@ -52,7 +52,7 @@ export function AboutTabs({
             type="button"
             onClick={() => setActive(t.id)}
             aria-pressed={active === t.id}
-            className="filter-chip flex shrink-0 items-center gap-2"
+            className="filter-chip flex items-center gap-2"
           >
             <Icon name={t.icon} className="h-4 w-4 text-gold-700" />
             {t.label}

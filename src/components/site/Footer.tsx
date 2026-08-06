@@ -35,7 +35,7 @@ export async function Footer() {
         <div className="mx-auto grid w-full max-w-[1400px] grid-cols-2 gap-3 px-4 py-8 sm:grid-cols-4 sm:px-6">
           <InteractiveHoverLink
             href={`tel:${contact.phone}`}
-            className="w-full"
+            className="w-full !px-3 sm:!px-6"
             leading={<Icon name="phone" className="h-4 w-4" />}
             text="Llamar"
           />
@@ -44,17 +44,17 @@ export async function Footer() {
             target="_blank"
             rel="noopener"
             variant="wa"
-            className="w-full"
+            className="w-full !px-3 sm:!px-6"
             leading={<Icon name="whatsapp" className="h-4 w-4" />}
             text="WhatsApp"
           />
           <InteractiveHoverLink
             href={`mailto:${contact.email}`}
-            className="w-full"
+            className="w-full !px-3 sm:!px-6"
             leading={<Icon name="mail" className="h-4 w-4" />}
             text="Email"
           />
-          <QuoteButton className="w-full !py-3" text="Presupuesto" />
+          <QuoteButton className="w-full !px-3 !py-3 sm:!px-6" text="Presupuesto" />
         </div>
       </div>
 
@@ -69,7 +69,7 @@ export async function Footer() {
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-noir">
             Mantenimiento, reparaciones, instalaciones y reformas para hogares, empresas y comunidades.
           </p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-0.5 text-sm">
             <li className="flex items-center gap-2">
               <Icon name="map-pin" className="h-4 w-4 text-gold-700" />
               Barcelona, Badalona y área metropolitana
@@ -83,7 +83,7 @@ export async function Footer() {
 
         <nav aria-label="Secciones">
           <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Secciones</h2>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-0.5 text-sm">
             {[
               ["/quienes-somos", "Quiénes somos"],
               ["/servicios", "Servicios"],
@@ -95,7 +95,7 @@ export async function Footer() {
               ["/contacto", "Contacto"],
             ].map(([href, label]) => (
               <li key={href}>
-                <Link href={href} className="transition-colors hover:text-gold-700">
+                <Link href={href} className="inline-block py-2.5 transition-colors hover:text-gold-700">
                   {label}
                 </Link>
               </li>
@@ -105,10 +105,10 @@ export async function Footer() {
 
         <nav aria-label="Servicios">
           <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Servicios</h2>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-0.5 text-sm">
             {services.map((s) => (
               <li key={s.slug}>
-                <Link href={`/servicios/${s.slug}`} className="transition-colors hover:text-gold-700">
+                <Link href={`/servicios/${s.slug}`} className="inline-block py-2.5 transition-colors hover:text-gold-700">
                   {s.title}
                 </Link>
               </li>
@@ -118,14 +118,14 @@ export async function Footer() {
 
         <div>
           <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Contacto</h2>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-0.5 text-sm">
             <li>
-              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 transition-colors hover:text-gold-700">
+              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 py-2.5 transition-colors hover:text-gold-700">
                 <Icon name="phone" className="h-4 w-4 text-gold-700" /> {contact.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 transition-colors hover:text-gold-700">
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 py-2.5 transition-colors hover:text-gold-700">
                 <Icon name="mail" className="h-4 w-4 text-gold-700" /> {contact.email}
               </a>
             </li>
@@ -166,9 +166,9 @@ export async function Footer() {
         <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-noir sm:flex-row sm:px-6 sm:text-left">
           <p className="font-medium">{footer.tagline}</p>
           <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            <li><LegalLink doc="aviso-legal" className="hover:text-white">Aviso legal</LegalLink></li>
-            <li><LegalLink doc="politica-privacidad" className="hover:text-white">Privacidad</LegalLink></li>
-            <li><LegalLink doc="politica-cookies" className="hover:text-white">Cookies</LegalLink></li>
+            <li><LegalLink doc="aviso-legal" className="inline-block py-3 hover:text-white">Aviso legal</LegalLink></li>
+            <li><LegalLink doc="politica-privacidad" className="inline-block py-3 hover:text-white">Privacidad</LegalLink></li>
+            <li><LegalLink doc="politica-cookies" className="inline-block py-3 hover:text-white">Cookies</LegalLink></li>
             <li>© {year} FixArte BCN</li>
           </ul>
         </div>
