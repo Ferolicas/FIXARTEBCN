@@ -25,6 +25,20 @@ function str(form: FormData, key: string, max = 10000): string {
   return String(form.get(key) ?? "").trim().slice(0, max);
 }
 
+/** Lista de vídeos del panel: JSON [{src, poster}]. */
+function parseVideos(raw: string): { src: string; poster: string }[] {
+  if (!raw) return [];
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr
+      .filter((v) => v && typeof v.src === "string" && v.src.startsWith("/uploads/"))
+      .map((v) => ({ src: String(v.src), poster: String(v.poster || "") }));
+  } catch {
+    return [];
+  }
+}
+
 // ─────────────────────────────── AUTENTICACIÓN ───────────────────────────────
 
 export async function loginAction(form: FormData) {
@@ -126,6 +140,7 @@ export async function saveProjectAction(form: FormData) {
     beforeImage: str(form, "beforeImage", 400) || null,
     afterImage: str(form, "afterImage", 400) || null,
     images: parseLines(str(form, "images", 4000)),
+    videos: parseVideos(str(form, "videos", 20000)),
     featured: form.get("featured") === "on",
     published: form.get("published") === "on",
     order: Number(form.get("order") || 0),
@@ -149,6 +164,10 @@ export async function deleteProjectAction(form: FormData) {
     for (const img of [project.beforeImage, project.afterImage, ...((project.images as string[]) || [])]) {
       if (img) await deleteUpload(img);
     }
+    for (const v of (project.videos as { src: string; poster: string }[]) || []) {
+      await deleteUpload(v.src);
+      if (v.poster) await deleteUpload(v.poster);
+    }
     await db.project.delete({ where: { id } });
     revalidateWeb();
   }
@@ -163,6 +182,8 @@ export async function saveTestimonialAction(form: FormData) {
   const data = {
     name: str(form, "name", 120),
     role: str(form, "role", 160),
+    title: str(form, "title", 120),
+    service: str(form, "service", 120),
     text: str(form, "text", 2000),
     rating: Math.min(5, Math.max(1, Number(form.get("rating") || 5))),
     published: form.get("published") === "on",
@@ -179,9 +200,22 @@ export async function saveTestimonialAction(form: FormData) {
   redirect("/panel/opiniones");
 }
 
+export async function toggleTestimonialAction(form: FormData) {
+  await requireAdmin();
+  const id = Number(form.get("id") || 0);
+  const t = await db.testimonial.findUnique({ where: { id } });
+  if (t) {
+    await db.testimonial.update({ where: { id }, data: { published: !t.published } });
+    revalidateWeb();
+  }
+  redirect("/panel/opiniones");
+}
+
 export async function deleteTestimonialAction(form: FormData) {
   await requireAdmin();
   const id = Number(form.get("id") || 0);
+  const t = await db.testimonial.findUnique({ where: { id } });
+  if (t?.photo) await deleteUpload(t.photo);
   await db.testimonial.deleteMany({ where: { id } });
   revalidateWeb();
   redirect("/panel/opiniones");

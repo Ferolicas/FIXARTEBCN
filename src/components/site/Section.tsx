@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Icon } from "./Icons";
+import { QuoteButton } from "./QuoteModal";
+import { InteractiveHoverLink } from "@/components/ui/interactive-hover-button";
 
 export function SectionHeading({
   kicker,
@@ -49,16 +51,22 @@ export function CtaBand({
         <p className="slash-label relative !text-ink-200">Presupuesto en 24h</p>
         <h2 className="relative mt-3 text-4xl text-white sm:text-5xl">{title}</h2>
         <p className="relative mx-auto mt-4 max-w-xl text-ink-100">{text}</p>
-        <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link href="/presupuesto" className="btn-primary">
-            <Icon name="file-text" className="h-4 w-4" /> Solicitar presupuesto
-          </Link>
-          <a href={`tel:${phone}`} className="btn bg-white text-ink-900 hover:bg-cream-100">
-            <Icon name="phone" className="h-4 w-4" /> Llamar ahora
-          </a>
-          <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener" className="btn-wa">
-            <Icon name="whatsapp" className="h-4 w-4" /> WhatsApp
-          </a>
+        <div className="relative mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <QuoteButton variant="light" text="Pedir presupuesto" />
+          <InteractiveHoverLink
+            href={`tel:${phone}`}
+            variant="light"
+            leading={<Icon name="phone" className="h-4 w-4" />}
+            text="Llamar ahora"
+          />
+          <InteractiveHoverLink
+            href={`https://wa.me/${whatsapp}`}
+            target="_blank"
+            rel="noopener"
+            variant="wa"
+            leading={<Icon name="whatsapp" className="h-4 w-4" />}
+            text="WhatsApp"
+          />
         </div>
       </div>
     </section>

@@ -51,21 +51,21 @@ export default async function EngineeringPage() {
             {eng.items.map((item, i) => (
               <Reveal key={item.title} delay={i * 60}>
                 <div className="card flex h-full gap-4 p-6">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-ink-800">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cream-100 text-noir">
                     <Icon name={ICONS[i % ICONS.length]} className="h-6 w-6" />
                   </span>
                   <div>
                     <h2 className="text-lg">{item.title}</h2>
-                    <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{item.text}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-noir">{item.text}</p>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
-          <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-ink-50 p-6 text-center">
-            <p className="text-sm leading-relaxed text-ink-800">
+          <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-cream-100 p-6 text-center">
+            <p className="text-sm leading-relaxed text-noir">
               ¿Gestionas una <strong>comunidad, oficina o local</strong>? Descubre también nuestro servicio de{" "}
-              <Link href="/servicios/mantenimiento-comunidades-barcelona" className="font-semibold text-accent-600 underline underline-offset-2">
+              <Link href="/servicios/mantenimiento-comunidades-barcelona" className="font-semibold text-gold-700 underline underline-offset-2">
                 mantenimiento integral para comunidades y empresas
               </Link>
               .

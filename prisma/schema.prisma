@@ -50,6 +50,8 @@ model Project {
   beforeImage String?
   afterImage  String?
   images      Json     @default("[]")
+  // [{ src: "/uploads/videos/x.mp4", poster: "/uploads/videos/x.webp" }]
+  videos      Json     @default("[]")
   featured    Boolean  @default(false)
   published   Boolean  @default(true)
   order       Int      @default(0)
@@ -60,9 +62,16 @@ model Testimonial {
   id        Int      @id @default(autoincrement())
   name      String
   role      String   @default("")
+  /** Titular corto que escribe el cliente */
+  title     String   @default("")
   text      String
   rating    Int      @default(5)
-  published Boolean  @default(true)
+  /** Servicio al que se refiere la reseña */
+  service   String   @default("")
+  /** Foto opcional del trabajo, subida por el cliente */
+  photo     String?
+  /** Las reseñas del formulario público nacen sin publicar: se moderan en /panel */
+  published Boolean  @default(false)
   order     Int      @default(0)
   createdAt DateTime @default(now())
 }

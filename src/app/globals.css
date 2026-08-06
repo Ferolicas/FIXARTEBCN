@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Colores y animación del botón arcoíris (21st.dev / magicui) */
+:root {
+  --color-1: 0 100% 63%;
+  --color-2: 270 100% 63%;
+  --color-3: 210 100% 63%;
+  --color-4: 195 100% 63%;
+  --color-5: 90 100% 63%;
+}
+@keyframes rainbow {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+.animate-rainbow {
+  animation: rainbow var(--speed, 3s) infinite linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-rainbow { animation: none; }
+}
+
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
@@ -28,6 +47,15 @@
 
   --color-wa: #22c55e;
   --color-wa-600: #16a34a;
+
+  /* Negro cálido para textos y dorado metalizado de marca (igual que los SVG) */
+  --color-noir: #16130d;
+  --color-noir-700: #3d372c;
+  --color-gold-700: #6F4810;
+  --color-gold-500: #C58B20;
+  --color-gold-400: #D4A63A;
+  --color-gold-200: #F5D477;
+  --color-gold-100: #FFF0A8;
 }
 
 @layer base {
@@ -132,6 +160,103 @@
   }
 }
 
+/* Anclas: deja hueco para la cabecera fija al saltar de sección */
+.anchor {
+  scroll-margin-top: 156px;
+}
+@media (min-width: 640px) {
+  .anchor { scroll-margin-top: 178px; }
+}
+
+/* ── Dorado metalizado de marca ───────────────────────────── */
+.gold-text {
+  background: linear-gradient(135deg, #6F4810 0%, #C58B20 26%, #F0D07E 50%, #C58B20 74%, #765017 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gold-line {
+  border: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #6F4810 12%, #D4A63A 35%, #F5D477 50%, #C58B20 68%, #765017 88%, transparent);
+}
+.gold-rule {
+  background: linear-gradient(180deg, #D4A63A, #F5D477, #C58B20);
+}
+
+/* Etiqueta con barras diagonales doradas */
+.slash-gold {
+  @apply text-xs font-bold uppercase text-noir;
+  letter-spacing: 0.22em;
+}
+.slash-gold::before,
+.slash-gold::after {
+  background: linear-gradient(135deg, #C58B20, #F5D477, #C58B20);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slash-gold::before { content: "/ "; }
+.slash-gold::after { content: " /"; }
+
+/* Botón de filtro con efecto hundido al estar activo */
+.filter-chip {
+  @apply rounded-full border border-noir/15 bg-white px-4 py-2 text-[15px] font-bold text-noir transition-all duration-200;
+}
+.filter-chip:hover {
+  @apply border-gold-500/60;
+}
+.filter-chip[aria-pressed="true"] {
+  background: linear-gradient(180deg, #e6e0d4, #f3efe6);
+  border-color: rgba(197, 139, 32, 0.55);
+  box-shadow: inset 0 3px 6px rgba(22, 19, 13, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(1px);
+}
+
+/* Resalte verde de "precio cerrado": integrado en la frase, con una sombra
+   suave que le da profundidad sin parecer un botón. */
+.destacado-verde {
+  color: var(--color-wa);
+}
+
+/* Cinta deslizante de servicios */
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 42s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Número del paso dentro de un círculo dorado */
+.step-circle {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-noir/10 bg-white text-sm font-bold text-noir shadow-sm;
+  /* Tipografía de palo seco con cifras alineadas: Playfair usa números de
+     estilo antiguo y el 0 y el 1 quedaban a distinta altura. */
+  font-family: var(--font-sans);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Número grande de los pasos del proceso */
+.step-number {
+  font-family: var(--font-display);
+  font-style: italic;
+  line-height: 1;
+  @apply text-6xl font-semibold text-accent-500/25;
+}
+
 /* Aparición suave (sin CLS) */
 .reveal {
   opacity: 0;
@@ -146,11 +271,13 @@
   .reveal { opacity: 1; transform: none; }
 }
 
-/* Panel del hero: cielo cálido al atardecer (referencia editorial) */
+/* Fondo del hero: color base + miniatura difuminada incrustada (aparece al
+   instante, sin peticiones) mientras carga la foto real en AVIF/WebP. */
 .hero-panel {
-  background:
-    radial-gradient(120% 90% at 85% 10%, rgba(244, 155, 63, 0.18) 0%, transparent 50%),
-    linear-gradient(168deg, #c7ccd4 0%, #dcd3c8 34%, #e9d6bf 55%, #d9b894 78%, #8d764f 100%);
+  background-color: #cdd2d8;
+  background-image: url("data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASoYAA4APu1mqk2ppaQiMAgBMB2JZQCdABuE7PQs2FwMNk4AAMqpwOGpRw2wseAx/DeNBWTqBqktBnDoFwsm/T7RBCRkjuqbW0WkA/YmozRAAA==");
+  background-size: cover;
+  background-position: center;
 }
 
 /* Tiles del panel bento */

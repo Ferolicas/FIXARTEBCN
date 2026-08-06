@@ -63,10 +63,10 @@ export default async function ServicesPage() {
             image: s.image,
           }))}
         />
-        <p className="mx-auto mt-10 max-w-2xl text-center text-ink-700">
+        <p className="mx-auto mt-10 max-w-2xl text-center text-noir">
           ¿No encuentras exactamente lo que necesitas? Analizamos cada proyecto de forma personalizada para ofrecerte la
           mejor solución, con transparencia, calidad y atención cercana.{" "}
-          <Link href="/contacto" className="font-semibold text-accent-600 underline underline-offset-2">
+          <Link href="/contacto" className="font-semibold text-gold-700 underline underline-offset-2">
             Cuéntanoslo
           </Link>
           .

@@ -66,14 +66,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <article className="container-site py-10 sm:py-14">
         <div className="mx-auto max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-widest text-accent-600">
+          <p className="text-sm font-bold uppercase tracking-widest text-gold-700">
             Consejos ·{" "}
             <time dateTime={post.publishedAt.toISOString()}>
               {new Date(post.publishedAt).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })}
             </time>
           </p>
           <h1 className="mt-3 text-3xl leading-tight sm:text-4xl">{post.title}</h1>
-          <p className="mt-4 text-lg leading-relaxed text-ink-700">{post.excerpt}</p>
+          <p className="mt-4 text-lg leading-relaxed text-noir">{post.excerpt}</p>
 
           {post.coverImage && (
             <Image
@@ -87,23 +87,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
           <div className="prose-fix mt-8" dangerouslySetInnerHTML={{ __html: mdToHtml(post.content) }} />
 
-          <div className="mt-10 rounded-2xl bg-ink-50 p-6">
-            <p className="text-sm font-semibold text-ink-900">
+          <div className="mt-10 rounded-2xl bg-cream-100 p-6">
+            <p className="text-sm font-semibold text-noir">
               Escrito por el equipo técnico de FixArte BCN — profesionales de mantenimiento y reformas en Barcelona.
             </p>
           </div>
 
           {others.length > 0 && (
-            <nav aria-label="Más consejos" className="mt-10 border-t border-cream-200 pt-8">
+            <nav aria-label="Más consejos" className="mt-10 border-t border-noir/10 pt-8">
               <h2 className="text-xl">Sigue leyendo</h2>
               <ul className="mt-4 space-y-2">
                 {others.map((o) => (
                   <li key={o.slug}>
                     <Link
                       href={`/consejos/${o.slug}`}
-                      className="card flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-ink-900 transition-colors hover:border-accent-400"
+                      className="card flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-noir transition-colors hover:border-gold-500"
                     >
-                      <Icon name="star" className="h-4 w-4 shrink-0 text-accent-500" />
+                      <Icon name="star" className="h-4 w-4 shrink-0 text-gold-700" />
                       {o.title}
                       <Icon name="chevron-right" className="ml-auto h-4 w-4 shrink-0 text-ink-200" />
                     </Link>

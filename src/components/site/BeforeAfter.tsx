@@ -4,11 +4,21 @@ import { useState } from "react";
 import Image from "next/image";
 
 /** Comparador deslizante antes/después. */
-export function BeforeAfter({ before, after, alt }: { before: string; after: string; alt: string }) {
+export function BeforeAfter({
+  before,
+  after,
+  alt,
+  rounded = true,
+}: {
+  before: string;
+  after: string;
+  alt: string;
+  rounded?: boolean;
+}) {
   const [pos, setPos] = useState(50);
 
   return (
-    <div className="relative aspect-[4/3] w-full select-none overflow-hidden rounded-xl">
+    <div className={`relative aspect-[4/3] w-full select-none overflow-hidden ${rounded ? "rounded-2xl" : ""}`}>
       <Image src={after} alt={`${alt} — después`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 400px" />
       <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <Image src={before} alt={`${alt} — antes`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 400px" />
@@ -19,8 +29,8 @@ export function BeforeAfter({ before, after, alt }: { before: string; after: str
           ⇄
         </div>
       </div>
-      <span className="absolute left-3 top-3 rounded-full bg-ink-950/70 px-3 py-1 text-xs font-semibold text-white">Antes</span>
-      <span className="absolute right-3 top-3 rounded-full bg-accent-500/90 px-3 py-1 text-xs font-semibold text-white">Después</span>
+      <span className="absolute left-3 top-3 rounded-full bg-noir/75 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">Antes</span>
+      <span className="absolute right-3 top-3 rounded-full bg-wa/90 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">Después</span>
       <input
         type="range"
         min={0}

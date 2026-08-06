@@ -205,6 +205,12 @@ export function Icon({ name, className = "h-5 w-5" }: IconProps) {
           <path d="M6.5 8.8H3.4V21h3.1V8.8ZM5 7.4a1.9 1.9 0 1 0 0-3.9 1.9 1.9 0 0 0 0 3.9ZM21 14.2c0-3.4-1.8-5.6-4.5-5.6a3.9 3.9 0 0 0-3.4 1.8V8.8H10V21h3.1v-6.4c0-1.7.8-2.7 2.2-2.7 1.3 0 2.1.9 2.1 2.7V21H21v-6.8Z" />
         </svg>
       );
+    case "play":
+      return (
+        <svg viewBox="0 0 24 24" className={className} aria-hidden fill="currentColor">
+          <path d="M8 5.2v13.6c0 .8.9 1.3 1.5.8l10-6.8a1 1 0 0 0 0-1.6l-10-6.8c-.6-.4-1.5 0-1.5.8Z" />
+        </svg>
+      );
     case "camera":
       return (
         <svg viewBox="0 0 24 24" className={className} aria-hidden {...stroke}>

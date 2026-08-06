@@ -23,7 +23,7 @@ const crumbs = [
 
 function Stars({ n }: { n: number }) {
   return (
-    <span className="flex gap-0.5 text-accent-500" aria-label={`${n} de 5 estrellas`}>
+    <span className="flex gap-0.5 text-gold-700" aria-label={`${n} de 5 estrellas`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Icon key={i} name="star" className={`h-4 w-4 ${i < n ? "" : "opacity-20"}`} />
       ))}
@@ -62,13 +62,13 @@ export default async function TipsPage() {
           <div className="card mx-auto max-w-xl p-8 text-center">
             <Stars n={5} />
             <h3 className="mt-3 text-xl">Muy pronto, las opiniones de nuestros clientes</h3>
-            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-700">
+            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-noir">
               Estamos recopilando las valoraciones de personas, empresas y comunidades que han confiado en FixArte BCN.
               {social.maps ? " ¿Ya has trabajado con nosotros? Nos ayudaría mucho tu reseña en Google." : ""}
             </p>
             {social.maps && (
               <a href={social.maps} target="_blank" rel="noopener" className="btn-outline mt-5">
-                <Icon name="star" className="h-4 w-4 text-accent-500" /> Dejar una reseña en Google
+                <Icon name="star" className="h-4 w-4 text-gold-700" /> Dejar una reseña en Google
               </a>
             )}
           </div>
@@ -78,10 +78,10 @@ export default async function TipsPage() {
               <Reveal key={t.id} delay={(i % 3) * 60}>
                 <figure className="card flex h-full flex-col p-6">
                   <Stars n={t.rating} />
-                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink-800">“{t.text}”</blockquote>
-                  <figcaption className="mt-4 border-t border-cream-200 pt-3">
-                    <p className="text-sm font-bold text-ink-900">{t.name}</p>
-                    {t.role && <p className="text-xs text-ink-700">{t.role}</p>}
+                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-noir">“{t.text}”</blockquote>
+                  <figcaption className="mt-4 border-t border-noir/10 pt-3">
+                    <p className="text-sm font-bold text-noir">{t.name}</p>
+                    {t.role && <p className="text-xs text-noir">{t.role}</p>}
                   </figcaption>
                 </figure>
               </Reveal>
@@ -105,12 +105,12 @@ export default async function TipsPage() {
                   href={`/consejos/${p.slug}`}
                   className="card group flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/8"
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest text-accent-600">
+                  <p className="text-xs font-bold uppercase tracking-widest text-gold-700">
                     {new Date(p.publishedAt).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })}
                   </p>
                   <h3 className="mt-2 text-xl leading-snug">{p.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{p.excerpt}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-600">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-noir">{p.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-gold-700">
                     Leer artículo
                     <Icon name="arrow-right" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>

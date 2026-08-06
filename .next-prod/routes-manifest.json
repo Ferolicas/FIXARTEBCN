@@ -1,0 +1,291 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ],
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/consejos/[slug]",
+      "regex": "^/consejos/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/consejos/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/panel/consejos/[id]",
+      "regex": "^/panel/consejos/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/panel/consejos/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/panel/servicios/[id]",
+      "regex": "^/panel/servicios/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/panel/servicios/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/panel/trabajos/[id]",
+      "regex": "^/panel/trabajos/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/panel/trabajos/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/servicios/[slug]",
+      "regex": "^/servicios/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/servicios/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/uploads/[...path]",
+      "regex": "^/uploads/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPpath": "nxtPpath"
+      },
+      "namedRegex": "^/uploads/(?<nxtPpath>.+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/apple-icon.png",
+      "regex": "^/apple\\-icon\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/apple\\-icon\\.png(?:/)?$"
+    },
+    {
+      "page": "/aviso-legal",
+      "regex": "^/aviso\\-legal(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/aviso\\-legal(?:/)?$"
+    },
+    {
+      "page": "/consejos",
+      "regex": "^/consejos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/consejos(?:/)?$"
+    },
+    {
+      "page": "/contacto",
+      "regex": "^/contacto(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contacto(?:/)?$"
+    },
+    {
+      "page": "/icon.png",
+      "regex": "^/icon\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/icon\\.png(?:/)?$"
+    },
+    {
+      "page": "/ingenieria",
+      "regex": "^/ingenieria(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ingenieria(?:/)?$"
+    },
+    {
+      "page": "/manifest.webmanifest",
+      "regex": "^/manifest\\.webmanifest(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/manifest\\.webmanifest(?:/)?$"
+    },
+    {
+      "page": "/opengraph-image",
+      "regex": "^/opengraph\\-image(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/opengraph\\-image(?:/)?$"
+    },
+    {
+      "page": "/opinar",
+      "regex": "^/opinar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/opinar(?:/)?$"
+    },
+    {
+      "page": "/panel",
+      "regex": "^/panel(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel(?:/)?$"
+    },
+    {
+      "page": "/panel/ajustes",
+      "regex": "^/panel/ajustes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/ajustes(?:/)?$"
+    },
+    {
+      "page": "/panel/consejos",
+      "regex": "^/panel/consejos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/consejos(?:/)?$"
+    },
+    {
+      "page": "/panel/contenido",
+      "regex": "^/panel/contenido(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/contenido(?:/)?$"
+    },
+    {
+      "page": "/panel/login",
+      "regex": "^/panel/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/login(?:/)?$"
+    },
+    {
+      "page": "/panel/opiniones",
+      "regex": "^/panel/opiniones(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/opiniones(?:/)?$"
+    },
+    {
+      "page": "/panel/servicios",
+      "regex": "^/panel/servicios(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/servicios(?:/)?$"
+    },
+    {
+      "page": "/panel/solicitudes",
+      "regex": "^/panel/solicitudes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/solicitudes(?:/)?$"
+    },
+    {
+      "page": "/panel/trabajos",
+      "regex": "^/panel/trabajos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/panel/trabajos(?:/)?$"
+    },
+    {
+      "page": "/politica-cookies",
+      "regex": "^/politica\\-cookies(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/politica\\-cookies(?:/)?$"
+    },
+    {
+      "page": "/politica-privacidad",
+      "regex": "^/politica\\-privacidad(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/politica\\-privacidad(?:/)?$"
+    },
+    {
+      "page": "/presupuesto",
+      "regex": "^/presupuesto(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/presupuesto(?:/)?$"
+    },
+    {
+      "page": "/quienes-somos",
+      "regex": "^/quienes\\-somos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/quienes\\-somos(?:/)?$"
+    },
+    {
+      "page": "/robots.txt",
+      "regex": "^/robots\\.txt(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/robots\\.txt(?:/)?$"
+    },
+    {
+      "page": "/servicios",
+      "regex": "^/servicios(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/servicios(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
+    },
+    {
+      "page": "/trabajos",
+      "regex": "^/trabajos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/trabajos(?:/)?$"
+    },
+    {
+      "page": "/urgencias",
+      "regex": "^/urgencias(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/urgencias(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

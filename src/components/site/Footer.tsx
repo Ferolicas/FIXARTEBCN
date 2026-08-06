@@ -3,6 +3,9 @@ import Image from "next/image";
 import { db } from "@/lib/db";
 import { getContact, getSocial, getFooter, waLink } from "@/lib/content";
 import { Icon } from "./Icons";
+import { LegalLink } from "./LegalModal";
+import { InteractiveHoverLink } from "@/components/ui/interactive-hover-button";
+import { QuoteButton } from "@/components/site/QuoteModal";
 
 const SOCIAL_ITEMS: { key: "instagram" | "facebook" | "youtube" | "wallapop" | "milanuncios" | "linkedin" | "maps"; icon: string; label: string }[] = [
   { key: "maps", icon: "map-pin", label: "Google Maps" },
@@ -25,55 +28,61 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="px-3 pb-3 sm:px-4 sm:pb-4">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-ink-950 text-ink-100 sm:rounded-[2.5rem]">
+    <footer className="border-t border-noir/10 bg-cream-100 text-noir">
+      <div>
       {/* Accesos rápidos siempre visibles en el pie */}
-      <div className="border-b border-white/10">
-        <div className="container-site grid grid-cols-2 gap-3 py-8 sm:grid-cols-4">
-          <a href={`tel:${contact.phone}`} className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 transition-colors hover:bg-white/10">
-            <Icon name="phone" className="h-5 w-5 text-accent-400" />
-            <span className="text-sm font-semibold text-white">Llamar</span>
-          </a>
-          <a href={waLink(contact.whatsapp)} target="_blank" rel="noopener" className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 transition-colors hover:bg-white/10">
-            <Icon name="whatsapp" className="h-5 w-5 text-wa" />
-            <span className="text-sm font-semibold text-white">WhatsApp</span>
-          </a>
-          <a href={`mailto:${contact.email}`} className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 transition-colors hover:bg-white/10">
-            <Icon name="mail" className="h-5 w-5 text-accent-400" />
-            <span className="text-sm font-semibold text-white">Email</span>
-          </a>
-          <Link href="/presupuesto" className="flex items-center gap-3 rounded-xl bg-accent-500 px-4 py-3 transition-colors hover:bg-accent-600">
-            <Icon name="file-text" className="h-5 w-5 text-white" />
-            <span className="text-sm font-semibold text-white">Presupuesto</span>
-          </Link>
+      <div className="border-b border-noir/10">
+        <div className="mx-auto grid w-full max-w-[1400px] grid-cols-2 gap-3 px-4 py-8 sm:grid-cols-4 sm:px-6">
+          <InteractiveHoverLink
+            href={`tel:${contact.phone}`}
+            className="w-full"
+            leading={<Icon name="phone" className="h-4 w-4" />}
+            text="Llamar"
+          />
+          <InteractiveHoverLink
+            href={waLink(contact.whatsapp)}
+            target="_blank"
+            rel="noopener"
+            variant="wa"
+            className="w-full"
+            leading={<Icon name="whatsapp" className="h-4 w-4" />}
+            text="WhatsApp"
+          />
+          <InteractiveHoverLink
+            href={`mailto:${contact.email}`}
+            className="w-full"
+            leading={<Icon name="mail" className="h-4 w-4" />}
+            text="Email"
+          />
+          <QuoteButton className="w-full !py-3" text="Presupuesto" />
         </div>
       </div>
 
-      <div className="container-site grid gap-10 py-12 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div>
           <div className="flex items-center gap-2.5">
             <Image src="/logo.webp" alt="" width={40} height={40} className="h-10 w-10 rounded-xl" />
-            <span className="font-display text-lg font-bold text-white">
-              FixArte <span className="text-accent-400">BCN</span>
+            <span className="font-display text-lg font-bold text-noir">
+              FixArte <span className="text-gold-700">BCN</span>
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-200">
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-noir">
             Mantenimiento, reparaciones, instalaciones y reformas para hogares, empresas y comunidades.
           </p>
           <ul className="mt-4 space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <Icon name="map-pin" className="h-4 w-4 text-accent-400" />
+              <Icon name="map-pin" className="h-4 w-4 text-gold-700" />
               Barcelona, Badalona y área metropolitana
             </li>
             <li className="flex items-center gap-2">
-              <Icon name="clock" className="h-4 w-4 text-accent-400" />
+              <Icon name="clock" className="h-4 w-4 text-gold-700" />
               {contact.hours}
             </li>
           </ul>
         </div>
 
         <nav aria-label="Secciones">
-          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-white">Secciones</h2>
+          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Secciones</h2>
           <ul className="mt-4 space-y-2 text-sm">
             {[
               ["/quienes-somos", "Quiénes somos"],
@@ -86,7 +95,7 @@ export async function Footer() {
               ["/contacto", "Contacto"],
             ].map(([href, label]) => (
               <li key={href}>
-                <Link href={href} className="transition-colors hover:text-white">
+                <Link href={href} className="transition-colors hover:text-gold-700">
                   {label}
                 </Link>
               </li>
@@ -95,11 +104,11 @@ export async function Footer() {
         </nav>
 
         <nav aria-label="Servicios">
-          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-white">Servicios</h2>
+          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Servicios</h2>
           <ul className="mt-4 space-y-2 text-sm">
             {services.map((s) => (
               <li key={s.slug}>
-                <Link href={`/servicios/${s.slug}`} className="transition-colors hover:text-white">
+                <Link href={`/servicios/${s.slug}`} className="transition-colors hover:text-gold-700">
                   {s.title}
                 </Link>
               </li>
@@ -108,20 +117,20 @@ export async function Footer() {
         </nav>
 
         <div>
-          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-white">Contacto</h2>
+          <h2 className="font-display text-sm font-bold uppercase tracking-wider text-noir">Contacto</h2>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 transition-colors hover:text-white">
-                <Icon name="phone" className="h-4 w-4 text-accent-400" /> {contact.phoneDisplay}
+              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 transition-colors hover:text-gold-700">
+                <Icon name="phone" className="h-4 w-4 text-gold-700" /> {contact.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 transition-colors hover:text-white">
-                <Icon name="mail" className="h-4 w-4 text-accent-400" /> {contact.email}
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 transition-colors hover:text-gold-700">
+                <Icon name="mail" className="h-4 w-4 text-gold-700" /> {contact.email}
               </a>
             </li>
           </ul>
-          <h2 className="mt-6 font-display text-sm font-bold uppercase tracking-wider text-white">Síguenos</h2>
+          <h2 className="mt-6 font-display text-sm font-bold uppercase tracking-wider text-noir">Síguenos</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {SOCIAL_ITEMS.filter((s) => social[s.key]).map((s) => (
               <li key={s.key}>
@@ -131,7 +140,7 @@ export async function Footer() {
                   rel="noopener"
                   aria-label={s.label}
                   title={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-ink-100 transition-colors hover:bg-accent-500 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-noir/10 bg-white text-noir transition-colors hover:border-gold-500"
                 >
                   <Icon name={s.icon} className="h-5 w-5" />
                 </a>
@@ -144,7 +153,7 @@ export async function Footer() {
                 rel="noopener"
                 aria-label="WhatsApp Business"
                 title="WhatsApp Business"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-ink-100 transition-colors hover:bg-wa hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-wa text-white transition-colors hover:bg-wa-600"
               >
                 <Icon name="whatsapp" className="h-5 w-5" />
               </a>
@@ -153,13 +162,13 @@ export async function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-site flex flex-col items-center justify-between gap-3 py-6 text-center text-xs text-ink-200 sm:flex-row sm:text-left">
+      <div className="border-t border-noir/10">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-noir sm:flex-row sm:px-6 sm:text-left">
           <p className="font-medium">{footer.tagline}</p>
           <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            <li><Link href="/aviso-legal" className="hover:text-white">Aviso legal</Link></li>
-            <li><Link href="/politica-privacidad" className="hover:text-white">Privacidad</Link></li>
-            <li><Link href="/politica-cookies" className="hover:text-white">Cookies</Link></li>
+            <li><LegalLink doc="aviso-legal" className="hover:text-white">Aviso legal</LegalLink></li>
+            <li><LegalLink doc="politica-privacidad" className="hover:text-white">Privacidad</LegalLink></li>
+            <li><LegalLink doc="politica-cookies" className="hover:text-white">Cookies</LegalLink></li>
             <li>© {year} FixArte BCN</li>
           </ul>
         </div>

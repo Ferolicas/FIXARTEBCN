@@ -17,3 +17,11 @@ uploads/
 .DS_Store
 npm-debug.log*
 pnpm-debug.log*
+
+# Imagen original de 4K (10 MB): en el repo solo van las versiones optimizadas
+public/fondo.png
+public/fondo-lqip.txt
+
+# Originales pesados: en el repo solo van las versiones optimizadas
+public/urgencia.png
+public/ingenieria.png

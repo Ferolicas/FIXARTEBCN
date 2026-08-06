@@ -41,16 +41,16 @@ export default async function AboutPage() {
         <div className="container-site grid gap-4 md:grid-cols-2">
           <Reveal>
             <div className="card h-full border-l-4 !border-l-accent-500 p-7">
-              <Icon name="sparkles" className="h-6 w-6 text-accent-500" />
+              <Icon name="sparkles" className="h-6 w-6 text-gold-700" />
               <h2 className="mt-3 text-2xl">Nuestra misión</h2>
-              <p className="mt-3 leading-relaxed text-ink-700">{about.mission}</p>
+              <p className="mt-3 leading-relaxed text-noir">{about.mission}</p>
             </div>
           </Reveal>
           <Reveal delay={80}>
             <div className="card h-full border-l-4 !border-l-ink-800 p-7">
-              <Icon name="building" className="h-6 w-6 text-ink-800" />
+              <Icon name="building" className="h-6 w-6 text-noir" />
               <h2 className="mt-3 text-2xl">Nuestra visión</h2>
-              <p className="mt-3 leading-relaxed text-ink-700">{about.vision}</p>
+              <p className="mt-3 leading-relaxed text-noir">{about.vision}</p>
             </div>
           </Reveal>
         </div>
@@ -63,8 +63,8 @@ export default async function AboutPage() {
             {about.values.map((v, i) => (
               <Reveal key={v} delay={i * 40}>
                 <li className="card flex h-full flex-col items-center gap-2 p-5 text-center">
-                  <Icon name="check" className="h-5 w-5 text-accent-500" />
-                  <span className="text-sm font-semibold text-ink-900">{v}</span>
+                  <Icon name="check" className="h-5 w-5 text-gold-700" />
+                  <span className="text-sm font-semibold text-noir">{v}</span>
                 </li>
               </Reveal>
             ))}

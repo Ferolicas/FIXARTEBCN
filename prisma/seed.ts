@@ -28,10 +28,10 @@ const settings: Record<string, unknown> = {
     maps: "https://www.google.com/maps/search/?api=1&query=FixArte+BCN+Barcelona",
   },
   home: {
-    heroKicker: "Mantenimiento · Reparaciones · Reformas",
-    heroTitle: "Soluciones profesionales para tu hogar, negocio y comunidad",
+    heroKicker: "",
+    heroTitle: "Reformas y reparaciones en Barcelona",
     heroText:
-      "En FixArte BCN ofrecemos servicios de mantenimiento, reparaciones e instalaciones con un compromiso absoluto con la calidad, la seguridad y la puntualidad. Atendemos viviendas, locales comerciales, oficinas y comunidades de propietarios en Barcelona, Badalona y el área metropolitana.",
+      "Electricidad, fontanería, pintura y reformas para tu hogar, local o comunidad. Presupuesto cerrado y sin compromiso.",
     whyTitle: "¿Por qué elegir FixArte BCN?",
     why: [
       { title: "Atención rápida y profesional", text: "Respondemos pronto, llegamos puntuales y resolvemos a la primera." },

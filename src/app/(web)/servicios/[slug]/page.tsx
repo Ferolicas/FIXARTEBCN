@@ -7,6 +7,7 @@ import { getContact, waLink } from "@/lib/content";
 import { mdToHtml } from "@/lib/markdown";
 import { pageMetadata, JsonLd, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import { Icon } from "@/components/site/Icons";
+import { QuoteButton } from "@/components/site/QuoteModal";
 import { CtaBand, Breadcrumbs } from "@/components/site/Section";
 
 export const revalidate = 600;
@@ -75,15 +76,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <header className="container-site py-10 sm:py-14">
           <div className="grid items-start gap-10 lg:grid-cols-[1.6fr_1fr]">
             <div>
-              <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-accent-600">
+              <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gold-700">
                 <Icon name={service.icon} className="h-4 w-4" /> {service.title}
               </p>
               <h1 className="text-4xl leading-tight sm:text-5xl">{service.heroTitle}</h1>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-700">{service.shortDesc}</p>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-noir">{service.shortDesc}</p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/presupuesto" className="btn-primary">
-                  <Icon name="file-text" className="h-4 w-4" /> Pedir presupuesto
-                </Link>
+                <QuoteButton text="Pedir presupuesto" />
                 <a href={`tel:${contact.phone}`} className="btn-dark">
                   <Icon name="phone" className="h-4 w-4" /> {contact.phoneDisplay}
                 </a>
@@ -111,8 +110,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <h2 className="text-base">Qué hacemos</h2>
               <ul className="mt-3 space-y-2.5">
                 {bullets.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-sm text-ink-800">
-                    <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-accent-500" />
+                  <li key={b} className="flex items-start gap-2.5 text-sm text-noir">
+                    <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-gold-700" />
                     {b}
                   </li>
                 ))}
@@ -134,11 +133,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <div className="mt-4 space-y-3">
                     {faqs.map((f) => (
                       <details key={f.q} className="card group px-5 py-4">
-                        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-ink-900">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-noir">
                           {f.q}
-                          <Icon name="chevron-right" className="h-4 w-4 shrink-0 text-accent-500 transition-transform group-open:rotate-90" />
+                          <Icon name="chevron-right" className="h-4 w-4 shrink-0 text-gold-700 transition-transform group-open:rotate-90" />
                         </summary>
-                        <p className="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+                        <p className="mt-3 text-sm leading-relaxed text-noir">{f.a}</p>
                       </details>
                     ))}
                   </div>
@@ -152,9 +151,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     <li key={r.slug}>
                       <Link
                         href={`/servicios/${r.slug}`}
-                        className="card flex items-center gap-3 px-4 py-3 text-sm font-medium text-ink-900 transition-colors hover:border-accent-400"
+                        className="card flex items-center gap-3 px-4 py-3 text-sm font-medium text-noir transition-colors hover:border-gold-500"
                       >
-                        <Icon name={r.icon} className="h-4.5 w-4.5 text-accent-500" />
+                        <Icon name={r.icon} className="h-4.5 w-4.5 text-gold-700" />
                         {r.title}
                         <Icon name="chevron-right" className="ml-auto h-4 w-4 text-ink-200" />
                       </Link>

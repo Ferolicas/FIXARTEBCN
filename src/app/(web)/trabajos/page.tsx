@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { getContact, getSocial } from "@/lib/content";
 import { pageMetadata, JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { Icon } from "@/components/site/Icons";
+import { QuoteButton } from "@/components/site/QuoteModal";
 import { SectionHeading, CtaBand, Breadcrumbs } from "@/components/site/Section";
 import { GalleryGrid, type GalleryItem } from "@/components/site/GalleryGrid";
 
@@ -29,30 +30,20 @@ export default async function ProjectsPage() {
   ]);
 
   const galleryItems: GalleryItem[] = projects.flatMap((p) => {
-    const extra = ((p.images as string[]) || []).map((url, i) => ({
-      id: `${p.id}-img-${i}`,
-      url,
-      title: p.title,
-      category: p.category,
-      description: p.description || undefined,
-    }));
-    const pair = [
-      p.beforeImage && {
-        id: `${p.id}-antes`,
-        url: p.beforeImage,
-        title: `${p.title} — antes`,
-        category: p.category,
-        description: p.description || undefined,
-      },
-      p.afterImage && {
-        id: `${p.id}-despues`,
-        url: p.afterImage,
-        title: `${p.title} — después`,
-        category: p.category,
-        description: p.description || undefined,
-      },
-    ].filter(Boolean) as GalleryItem[];
-    return [...pair, ...extra];
+    const base = { title: p.title, category: p.category, description: p.description || undefined };
+    const out: GalleryItem[] = [];
+    if (p.beforeImage && p.afterImage) {
+      out.push({ id: `${p.id}-cmp`, kind: "comparador", url: p.afterImage, before: p.beforeImage, after: p.afterImage, ...base });
+    } else if (p.afterImage || p.beforeImage) {
+      out.push({ id: `${p.id}-img`, kind: "imagen", url: (p.afterImage || p.beforeImage)!, ...base });
+    }
+    for (const [i, v] of (((p.videos as { src: string; poster: string }[]) || [])).entries()) {
+      out.push({ id: `${p.id}-v${i}`, kind: "video", url: v.poster, video: v.src, ...base });
+    }
+    for (const [i, url] of (((p.images as string[]) || [])).entries()) {
+      out.push({ id: `${p.id}-i${i}`, kind: "imagen", url, ...base });
+    }
+    return out;
   });
 
   return (
@@ -72,18 +63,16 @@ export default async function ProjectsPage() {
       {projects.length === 0 ? (
         <section className="container-site pb-16">
           <div className="card mx-auto max-w-xl p-10 text-center">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-50 text-accent-600">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-cream-100 text-gold-700">
               <Icon name="gallery" className="h-7 w-7" />
             </span>
             <h2 className="mt-4 text-2xl">Estamos preparando la galería</h2>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-700">
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-noir">
               Muy pronto publicaremos aquí fotografías del antes y el después de nuestros proyectos. Mientras tanto,
               cuéntanos el tuyo: te enseñaremos ejemplos de trabajos similares al pedir tu presupuesto.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link href="/presupuesto" className="btn-primary">
-                <Icon name="file-text" className="h-4 w-4" /> Pedir presupuesto
-              </Link>
+              <QuoteButton text="Pedir presupuesto" />
               {social.instagram && (
                 <a href={social.instagram} target="_blank" rel="noopener" className="btn-outline">
                   <Icon name="instagram" className="h-4 w-4" /> Síguenos en Instagram

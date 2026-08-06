@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { PanelHeader } from "@/components/panel/ui";
 import { ImageUploader } from "@/components/panel/ImageUploader";
+import { VideoUploader } from "@/components/panel/VideoUploader";
 import { saveProjectAction } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -51,6 +52,12 @@ export default async function ProjectEditPage({ params }: { params: Promise<{ id
           <ImageUploader name="beforeImage" label="Foto ANTES" defaultValue={project?.beforeImage} subdir="trabajos" />
           <ImageUploader name="afterImage" label="Foto DESPUÉS" defaultValue={project?.afterImage} subdir="trabajos" />
           <input type="hidden" name="images" value={((project?.images as string[]) || []).join("\n")} />
+          <div className="sm:col-span-2">
+            <VideoUploader
+              name="videos"
+              defaultValue={(project?.videos as { src: string; poster: string }[]) || []}
+            />
+          </div>
           <label className="flex items-center gap-2.5 text-sm font-semibold text-ink-900">
             <input type="checkbox" name="featured" defaultChecked={project?.featured ?? false} className="h-4 w-4 accent-accent-500" />
             Proyecto destacado

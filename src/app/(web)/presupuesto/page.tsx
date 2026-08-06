@@ -48,16 +48,16 @@ export default async function BudgetPage() {
           />
           <ul className="mt-8 space-y-3">
             {TRUST.map((t) => (
-              <li key={t.text} className="flex items-center gap-3 text-sm text-ink-800">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-600">
+              <li key={t.text} className="flex items-center gap-3 text-sm text-noir">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cream-100 text-gold-700">
                   <Icon name={t.icon} className="h-4.5 w-4.5" />
                 </span>
                 {t.text}
               </li>
             ))}
           </ul>
-          <div className="mt-8 rounded-2xl bg-ink-50 p-5">
-            <p className="text-sm font-semibold text-ink-900">¿Prefieres contarlo directamente?</p>
+          <div className="mt-8 rounded-2xl bg-cream-100 p-5">
+            <p className="text-sm font-semibold text-noir">¿Prefieres contarlo directamente?</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <a href={`tel:${contact.phone}`} className="btn-dark !py-2.5">
                 <Icon name="phone" className="h-4 w-4" /> {contact.phoneDisplay}

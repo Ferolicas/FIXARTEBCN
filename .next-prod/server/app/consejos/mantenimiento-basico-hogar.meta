@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(web)/layout,_N_T_/(web)/consejos/layout,_N_T_/(web)/consejos/[slug]/layout,_N_T_/(web)/consejos/[slug]/page,_N_T_/consejos/mantenimiento-basico-hogar"
+  }
+}

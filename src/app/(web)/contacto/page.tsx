@@ -73,18 +73,18 @@ export default async function ContactPage() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
-            <div key={c.title} className="card flex h-full flex-col p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-50 text-accent-600">
+            <div key={c.title} className={`flex h-full flex-col rounded-3xl p-6 ${c.icon === "whatsapp" ? "bg-wa text-white" : "card"}`}>
+              <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${c.icon === "whatsapp" ? "bg-white/20 text-white" : "bg-cream-100 text-gold-700"}`}>
                 <Icon name={c.icon} className="h-5.5 w-5.5" />
               </span>
               <h2 className="mt-3 text-base">{c.title}</h2>
-              <p className="mt-1 flex-1 text-sm text-ink-700">{c.text}</p>
+              <p className="mt-1 flex-1 text-sm text-noir">{c.text}</p>
               {c.href && c.cta && (
                 <a
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener" : undefined}
-                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent-600 hover:text-accent-700"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-gold-700 hover:text-accent-700"
                 >
                   {c.cta} <Icon name="arrow-right" className="h-4 w-4" />
                 </a>
@@ -98,12 +98,12 @@ export default async function ContactPage() {
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <h2 className="text-3xl">Escríbenos</h2>
-            <p className="mt-3 max-w-md leading-relaxed text-ink-700">
+            <p className="mt-3 max-w-md leading-relaxed text-noir">
               Rellena el formulario y te responderemos lo antes posible. Si tu consulta es una avería urgente, te
               recomendamos llamarnos o escribirnos por WhatsApp para atenderte de inmediato.
             </p>
-            <p className="mt-5 text-sm text-ink-700">
-              Horario de atención: <strong className="text-ink-900">{contact.hours}</strong>
+            <p className="mt-5 text-sm text-noir">
+              Horario de atención: <strong className="text-noir">{contact.hours}</strong>
             </p>
           </div>
           <LeadForm type="CONTACTO" services={services} submitLabel="Enviar mensaje" whatsapp={contact.whatsapp} />

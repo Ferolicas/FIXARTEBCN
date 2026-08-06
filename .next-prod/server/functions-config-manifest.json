@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/panel/upload": {
+      "maxDuration": 300
+    },
+    "/api/resenas": {
+      "maxDuration": 60
+    },
+    "/api/leads": {
+      "maxDuration": 60
+    }
+  }
+}

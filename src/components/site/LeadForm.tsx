@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Icon } from "./Icons";
+import { LegalLink } from "./LegalModal";
+import { InteractiveHoverButton, InteractiveHoverLink } from "@/components/ui/interactive-hover-button";
 
 type Props = {
   type: "PRESUPUESTO" | "CONTACTO" | "URGENCIA";
@@ -47,14 +49,15 @@ export function LeadForm({ type, services = [], withPhotos = false, submitLabel 
           Hemos recibido tu mensaje y te responderemos lo antes posible. Si es urgente, escríbenos directamente por
           WhatsApp.
         </p>
-        <a
+        <InteractiveHoverLink
           href={`https://wa.me/${whatsapp}`}
           target="_blank"
           rel="noopener"
-          className="btn-wa mt-5"
-        >
-          <Icon name="whatsapp" className="h-4 w-4" /> Abrir WhatsApp
-        </a>
+          variant="wa"
+          className="mt-5"
+          leading={<Icon name="whatsapp" className="h-4 w-4" />}
+          text="Abrir WhatsApp"
+        />
       </div>
     );
   }
@@ -145,9 +148,9 @@ export function LeadForm({ type, services = [], withPhotos = false, submitLabel 
         <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 rounded border-cream-200 accent-accent-500" />
         <span>
           He leído y acepto la{" "}
-          <a href="/politica-privacidad" target="_blank" className="font-medium text-accent-600 underline">
+          <LegalLink doc="politica-privacidad" className="font-bold text-noir underline underline-offset-2">
             política de privacidad
-          </a>
+          </LegalLink>
           . Tus datos solo se usan para responder a tu solicitud. *
         </span>
       </label>
@@ -158,15 +161,14 @@ export function LeadForm({ type, services = [], withPhotos = false, submitLabel 
         </p>
       )}
 
-      <button type="submit" disabled={status === "sending"} className="btn-primary w-full disabled:opacity-60">
-        {status === "sending" ? (
-          "Enviando…"
-        ) : (
-          <>
-            <Icon name="send" className="h-4 w-4" /> {submitLabel}
-          </>
-        )}
-      </button>
+      <InteractiveHoverButton
+        type="submit"
+        disabled={status === "sending"}
+        variant="solid"
+        className="w-full"
+        text={status === "sending" ? "Enviando…" : submitLabel}
+        leading={status === "sending" ? undefined : <Icon name="send" className="h-4 w-4" />}
+      />
     </form>
   );
 }
