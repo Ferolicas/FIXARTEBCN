@@ -1,6 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /panel
-Disallow: /api/
-
-Sitemap: http://localhost:3100/sitemap.xml
