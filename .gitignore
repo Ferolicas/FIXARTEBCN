@@ -12,7 +12,9 @@ next-env.d.ts
 !.env.example
 
 # subidas de usuario (viven fuera del repo en producción)
-uploads/
+# Solo la carpeta de archivos subidos desde el panel, en la raíz.
+# Sin la barra inicial también ignoraría src/app/uploads/, que es código.
+/uploads/
 
 # sistema
 .DS_Store
