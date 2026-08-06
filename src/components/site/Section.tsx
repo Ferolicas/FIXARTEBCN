@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Icon } from "./Icons";
 import { QuoteButton } from "./QuoteModal";
 import { InteractiveHoverLink } from "@/components/ui/interactive-hover-button";
+import { Reveal } from "./Reveal";
 
 export function SectionHeading({
   kicker,
@@ -17,11 +18,11 @@ export function SectionHeading({
   as?: "h1" | "h2";
 }) {
   return (
-    <div className={`max-w-2xl ${center ? "mx-auto text-center" : ""}`}>
+    <Reveal className={`max-w-2xl ${center ? "mx-auto text-center" : ""}`}>
       {kicker && <p className="slash-label mb-3">{kicker}</p>}
       <Tag className={Tag === "h1" ? "text-4xl leading-[1.08] sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl"}>{title}</Tag>
       {text && <p className="mt-4 text-lg leading-relaxed text-ink-700">{text}</p>}
-    </div>
+    </Reveal>
   );
 }
 

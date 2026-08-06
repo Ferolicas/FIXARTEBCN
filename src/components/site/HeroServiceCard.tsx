@@ -48,7 +48,7 @@ export function HeroServiceCard({
       <hr className="gold-line my-3.5" />
 
       {/* Filtros por servicio */}
-      <div className="flex flex-wrap justify-center gap-1.5" role="group" aria-label="Elige un servicio">
+      <div className="grid grid-cols-3 gap-1.5" role="group" aria-label="Elige un servicio">
         {services.map((s, i) => (
           <button
             key={s.slug}

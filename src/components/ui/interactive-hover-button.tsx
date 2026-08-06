@@ -18,7 +18,7 @@ const ESTILOS: Record<HoverVariant, { base: string; fill: string; hoverText: str
 };
 
 const CLASES_BASE =
-  "group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full border px-6 py-3 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60";
+  "group relative inline-flex cursor-pointer touch-manipulation items-center justify-center overflow-hidden rounded-full border px-6 py-3 text-sm font-bold transition-colors [-webkit-tap-highlight-color:transparent] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60";
 
 function Contenido({
   text,
@@ -34,8 +34,10 @@ function Contenido({
   return (
     <>
       {/* Contenido en reposo. En móvil puede partirse en dos líneas: es
-          preferible a que una etiqueta larga se salga del botón. */}
-      <span className="relative z-10 inline-flex items-center gap-2 text-center leading-tight transition-all duration-300 group-hover:translate-x-10 group-hover:opacity-0 sm:whitespace-nowrap">
+          preferible a que una etiqueta larga se salga del botón.
+          En pantallas táctiles no existe :hover, así que el mismo efecto se
+          dispara con :active al pulsar. */}
+      <span className="relative z-10 inline-flex items-center gap-2 text-center leading-tight transition-all duration-300 group-hover:translate-x-10 group-hover:opacity-0 group-active:translate-x-10 group-active:opacity-0 sm:whitespace-nowrap">
         {leading}
         {text}
       </span>
@@ -43,7 +45,7 @@ function Contenido({
       {/* Contenido que entra con la flecha */}
       <span
         className={cn(
-          "absolute inset-0 z-10 flex translate-x-10 items-center justify-center gap-2 whitespace-nowrap px-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100",
+          "absolute inset-0 z-10 flex translate-x-10 items-center justify-center gap-2 whitespace-nowrap px-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100",
           hoverText
         )}
       >
@@ -57,6 +59,7 @@ function Contenido({
         className={cn(
           "absolute left-1/2 top-1/2 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 transition-all duration-300",
           "group-hover:h-full group-hover:w-full group-hover:opacity-100",
+          "group-active:h-full group-active:w-full group-active:opacity-100",
           fill
         )}
       />

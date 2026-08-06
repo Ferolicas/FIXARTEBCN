@@ -44,7 +44,7 @@ export function AboutTabs({
       <div
         role="group"
         aria-label="Conoce FixArte BCN"
-        className="flex flex-wrap justify-center gap-2"
+        className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center"
       >
         {tabs.map((t) => (
           <button
@@ -52,7 +52,7 @@ export function AboutTabs({
             type="button"
             onClick={() => setActive(t.id)}
             aria-pressed={active === t.id}
-            className="filter-chip flex items-center gap-2"
+            className="filter-chip flex items-center justify-center gap-1.5 text-center sm:justify-start"
           >
             <Icon name={t.icon} className="h-4 w-4 text-gold-700" />
             {t.label}

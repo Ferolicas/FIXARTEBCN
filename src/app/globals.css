@@ -200,15 +200,17 @@
 .slash-gold::after { content: " /"; }
 
 /* Botón de filtro con efecto hundido al estar activo */
-/* Chip de filtro. En móvil es algo más compacto para que quepan más por fila,
-   pero nunca baja de 44px de alto (objetivo táctil cómodo). */
+/* Chip de filtro. En móvil van tres por fila dentro de una rejilla, así que
+   el texto se ajusta al ancho de la celda; nunca baja de 44px de alto
+   (objetivo táctil cómodo). */
 .filter-chip {
-  @apply rounded-full border border-noir/15 bg-white px-3.5 py-2.5 text-sm font-bold text-noir transition-all duration-200;
+  @apply rounded-2xl border border-noir/15 bg-white px-2 py-2 text-[12.5px] font-bold leading-tight text-noir transition-all duration-200;
   min-height: 44px;
+  hyphens: auto;
 }
 @media (min-width: 640px) {
   .filter-chip {
-    @apply px-4 text-[15px];
+    @apply rounded-full px-4 text-[15px];
   }
 }
 .filter-chip:hover {

@@ -186,7 +186,7 @@ export default async function LandingPage() {
                 />
               </div>
 
-              <ul className="mt-7 inline-grid gap-2 rounded-2xl bg-white/40 px-5 py-4 backdrop-blur-sm sm:grid-cols-[auto_auto] sm:gap-x-6">
+              <ul className="mt-7 grid w-fit max-w-full gap-2.5 rounded-2xl bg-white/45 px-5 py-4 backdrop-blur-sm">
                 {[
                   <>Presupuesto cerrado por escrito, <strong className="font-bold">sin sorpresas</strong></>,
                   <>Urgencias <strong className="font-bold">24 h</strong></>,
@@ -194,9 +194,9 @@ export default async function LandingPage() {
                 ].map((t, i) => (
                   <li
                     key={i}
-                    className={`flex items-center gap-2 text-[15.4px] font-semibold text-black ${i === 2 ? "sm:col-span-2" : ""}`}
+                    className="flex items-start gap-2.5 text-[15.4px] font-semibold leading-snug text-black"
                   >
-                    <span aria-hidden className="gold-rule h-1.5 w-1.5 shrink-0 rounded-full" />
+                    <span aria-hidden className="gold-rule mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full" />
                     {t}
                   </li>
                 ))}
@@ -230,19 +230,21 @@ export default async function LandingPage() {
           center
         />
         <div className="mt-12">
-          <ServicesFilter
-            services={services.map((s) => ({
-              slug: s.slug,
-              title: s.title,
-              icon: s.icon,
-              shortDesc: s.shortDesc,
-              bullets: (s.bullets as string[]) || [],
-              faqs: (s.faqs as { q: string; a: string }[]) || [],
-            }))}
-            phone={contact.phone}
-            phoneDisplay={contact.phoneDisplay}
-            whatsapp={contact.whatsapp}
-          />
+          <Reveal delay={120}>
+            <ServicesFilter
+              services={services.map((s) => ({
+                slug: s.slug,
+                title: s.title,
+                icon: s.icon,
+                shortDesc: s.shortDesc,
+                bullets: (s.bullets as string[]) || [],
+                faqs: (s.faqs as { q: string; a: string }[]) || [],
+              }))}
+              phone={contact.phone}
+              phoneDisplay={contact.phoneDisplay}
+              whatsapp={contact.whatsapp}
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -256,42 +258,51 @@ export default async function LandingPage() {
             center
           />
           <div className="mt-12">
-            <WorksFilter
-              services={services.map((s) => ({ slug: s.slug, title: s.title, icon: s.icon }))}
-              items={galleryItems}
-            />
+            <Reveal delay={120}>
+              <WorksFilter
+                services={services.map((s) => ({ slug: s.slug, title: s.title, icon: s.icon }))}
+                items={galleryItems}
+              />
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ═══ URGENCIAS ════════════════════════════════════════ */}
       <section id="urgencias" className="anchor relative overflow-hidden">
-        {/* La foto ocupa exactamente la sección */}
-        <picture>
-          <source
-            type="image/avif"
-            sizes="100vw"
-            srcSet="/urgencia-640.avif 640w, /urgencia-960.avif 960w, /urgencia-1280.avif 1280w"
-          />
-          <source
-            type="image/webp"
-            sizes="100vw"
-            srcSet="/urgencia-640.webp 640w, /urgencia-960.webp 960w, /urgencia-1280.webp 1280w"
-          />
-          <img
-            src="/urgencia-1280.webp"
-            alt=""
-            aria-hidden
-            width={1280}
-            height={720}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
-          />
-        </picture>
+        {/* La foto se mantiene a la altura de la pantalla en lugar de estirarse
+            a toda la sección: si cubriera los ~1600px de alto que mide en
+            móvil habría que ampliarla más del doble y sólo se vería un trozo
+            enorme de fachada. Así se ve mucho más ancha y acompaña el scroll. */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="sticky top-0 h-svh w-full">
+            <picture>
+              <source
+                type="image/avif"
+                sizes="100vw"
+                srcSet="/urgencia-640.avif 640w, /urgencia-960.avif 960w, /urgencia-1280.avif 1280w"
+              />
+              <source
+                type="image/webp"
+                sizes="100vw"
+                srcSet="/urgencia-640.webp 640w, /urgencia-960.webp 960w, /urgencia-1280.webp 1280w"
+              />
+              <img
+                src="/urgencia-1280.webp"
+                alt=""
+                aria-hidden
+                width={1280}
+                height={720}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover object-[62%_center]"
+              />
+            </picture>
+          </div>
+        </div>
 
         {/* La tarjeta cubre la sección entera, del mismo tamaño que la foto */}
-        <div className="relative bg-white/75 backdrop-blur-md">
+        <div className="relative bg-white/85 backdrop-blur-md sm:bg-white/75">
           <div className="container-site py-16 sm:py-24">
             <div className="text-center">
               <p className="slash-gold !text-red-700">Servicio de urgencias</p>
@@ -322,12 +333,14 @@ export default async function LandingPage() {
             </div>
 
             <div className="mt-12">
-              <EmergencyTabs
-                zones={emergency.zones}
-                outside={emergency.outside}
-                faqs={FAQS_URGENCIAS}
-                pasos={PROCESO}
-              />
+              <Reveal delay={120}>
+                <EmergencyTabs
+                  zones={emergency.zones}
+                  outside={emergency.outside}
+                  faqs={FAQS_URGENCIAS}
+                  pasos={PROCESO}
+                />
+              </Reveal>
             </div>
           </div>
         </div>
@@ -343,46 +356,54 @@ export default async function LandingPage() {
             center
           />
           <div className="mt-12">
-            <AboutTabs
-              intro={about.intro}
-              stats={stats}
-              mission={about.mission}
-              vision={about.vision}
-              values={about.values}
-              whyTitle={home.whyTitle}
-              why={home.why}
-            />
+            <Reveal delay={120}>
+              <AboutTabs
+                intro={about.intro}
+                stats={stats}
+                mission={about.mission}
+                vision={about.vision}
+                values={about.values}
+                whyTitle={home.whyTitle}
+                why={home.why}
+              />
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ═══ INGENIERÍA ═══════════════════════════════════════ */}
       <section id="ingenieria" className="anchor relative overflow-hidden py-16 sm:py-24">
-        <picture>
-          <source
-            type="image/avif"
-            sizes="100vw"
-            srcSet="/ingenieria-640.avif 640w, /ingenieria-960.avif 960w, /ingenieria-1280.avif 1280w, /ingenieria-1920.avif 1920w"
-          />
-          <source
-            type="image/webp"
-            sizes="100vw"
-            srcSet="/ingenieria-640.webp 640w, /ingenieria-960.webp 960w, /ingenieria-1280.webp 1280w, /ingenieria-1920.webp 1920w"
-          />
-          <img
-            src="/ingenieria-1280.webp"
-            alt=""
-            aria-hidden
-            width={1280}
-            height={720}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </picture>
+        {/* Igual que en urgencias: la foto se queda a la altura de la pantalla
+            para no tener que ampliarla hasta cubrir toda la sección */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="sticky top-0 h-svh w-full">
+            <picture>
+              <source
+                type="image/avif"
+                sizes="100vw"
+                srcSet="/ingenieria-640.avif 640w, /ingenieria-960.avif 960w, /ingenieria-1280.avif 1280w, /ingenieria-1920.avif 1920w"
+              />
+              <source
+                type="image/webp"
+                sizes="100vw"
+                srcSet="/ingenieria-640.webp 640w, /ingenieria-960.webp 960w, /ingenieria-1280.webp 1280w, /ingenieria-1920.webp 1920w"
+              />
+              <img
+                src="/ingenieria-1280.webp"
+                alt=""
+                aria-hidden
+                width={1280}
+                height={720}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </picture>
+          </div>
+        </div>
 
         {/* Mismo velo que en urgencias: el texto se lee sin necesidad de tarjeta */}
-        <div aria-hidden className="absolute inset-0 bg-white/75 backdrop-blur-md" />
+        <div aria-hidden className="absolute inset-0 bg-white/85 backdrop-blur-md sm:bg-white/75" />
 
         <div className="container-site relative">
           <div className="mx-auto max-w-3xl text-center">
@@ -444,20 +465,22 @@ export default async function LandingPage() {
 
             {testimonials.length > 0 ? (
               <div className="mt-6">
-                <ReviewsGrid
-                  reviews={testimonials.map((t) => ({
-                    id: t.id,
-                    name: t.name,
-                    role: t.role,
-                    title: t.title,
-                    text: t.text,
-                    rating: t.rating,
-                    service: t.service,
-                    photo: t.photo,
-                    createdAt: t.createdAt.toISOString(),
-                    fecha: new Date(t.createdAt).toLocaleDateString("es-ES", { month: "short", year: "numeric" }),
-                  }))}
-                />
+                <Reveal delay={120}>
+                  <ReviewsGrid
+                    reviews={testimonials.map((t) => ({
+                      id: t.id,
+                      name: t.name,
+                      role: t.role,
+                      title: t.title,
+                      text: t.text,
+                      rating: t.rating,
+                      service: t.service,
+                      photo: t.photo,
+                      createdAt: t.createdAt.toISOString(),
+                      fecha: new Date(t.createdAt).toLocaleDateString("es-ES", { month: "short", year: "numeric" }),
+                    }))}
+                  />
+                </Reveal>
               </div>
             ) : (
               <Reveal>
@@ -493,16 +516,18 @@ export default async function LandingPage() {
               <span className="h-px flex-1 gold-line" />
             </div>
 
-            <PostsGrid
-              posts={posts.map((p, i) => ({
-                slug: p.slug,
-                title: p.title,
-                excerpt: p.excerpt,
-                date: new Date(p.publishedAt).toLocaleDateString("es-ES", { month: "long", year: "numeric" }),
-                html: mdToHtml(p.content),
-                icon: CONSEJO_ICONS[i % CONSEJO_ICONS.length],
-              }))}
-            />
+            <Reveal delay={120}>
+              <PostsGrid
+                posts={posts.map((p, i) => ({
+                  slug: p.slug,
+                  title: p.title,
+                  excerpt: p.excerpt,
+                  date: new Date(p.publishedAt).toLocaleDateString("es-ES", { month: "long", year: "numeric" }),
+                  html: mdToHtml(p.content),
+                  icon: CONSEJO_ICONS[i % CONSEJO_ICONS.length],
+                }))}
+              />
+            </Reveal>
           </div>
         </div>
       </section>
