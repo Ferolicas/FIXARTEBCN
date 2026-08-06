@@ -34,7 +34,7 @@ export function EmergencyTabs({
       <div
         role="group"
         aria-label="Más información sobre urgencias"
-        className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center"
+        className="grid grid-cols-2 gap-2 min-[360px]:grid-cols-3 sm:flex sm:flex-wrap sm:justify-center"
       >
         {tabs.map((t) => (
           <button

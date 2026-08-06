@@ -188,8 +188,12 @@ export default async function LandingPage() {
 
               <ul className="mt-7 grid w-fit max-w-full gap-2.5 rounded-2xl bg-white/45 px-5 py-4 backdrop-blur-sm">
                 {[
-                  <>Presupuesto cerrado por escrito, <strong className="font-bold">sin sorpresas</strong></>,
-                  <>Urgencias <strong className="font-bold">24 h</strong></>,
+                  /* "sin sorpresas" iba en negrita y acababa sola en la última
+                     línea, como si fuera otro punto de la lista. Va unida a la
+                     coma con un espacio duro y el reparto de líneas
+                     equilibrado, para que nunca quede descolgada. */
+                  <>Presupuesto cerrado por escrito,&nbsp;<strong className="font-bold">sin sorpresas</strong></>,
+                  <>Urgencias&nbsp;<strong className="font-bold">24 h</strong></>,
                   <>Barcelona · Badalona · Área metropolitana</>,
                 ].map((t, i) => (
                   <li
@@ -197,7 +201,7 @@ export default async function LandingPage() {
                     className="flex items-start gap-2.5 text-[15.4px] font-semibold leading-snug text-black"
                   >
                     <span aria-hidden className="gold-rule mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full" />
-                    {t}
+                    <span className="[text-wrap:balance]">{t}</span>
                   </li>
                 ))}
               </ul>
@@ -270,12 +274,14 @@ export default async function LandingPage() {
 
       {/* ═══ URGENCIAS ════════════════════════════════════════ */}
       <section id="urgencias" className="anchor relative overflow-hidden">
-        {/* La foto se mantiene a la altura de la pantalla en lugar de estirarse
-            a toda la sección: si cubriera los ~1600px de alto que mide en
-            móvil habría que ampliarla más del doble y sólo se vería un trozo
-            enorme de fachada. Así se ve mucho más ancha y acompaña el scroll. */}
+        {/* La foto es 16:9. Estirada a toda una sección de móvil (~980px de
+            alto y 390 de ancho) hay que ampliarla casi 3x y sólo se ve un 22%
+            de su ancho: de ahí la fachada gigante. En móvil se muestra como
+            banda superior, con una proporción parecida a la suya, y se funde
+            con el fondo; así se ve más del 60% de la foto. Desde sm la
+            pantalla ya es ancha y vuelve a cubrir la sección entera. */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-svh w-full">
+          <div className="sticky top-0 h-[42svh] w-full sm:h-svh">
             <picture>
               <source
                 type="image/avif"
@@ -298,11 +304,12 @@ export default async function LandingPage() {
                 className="h-full w-full object-cover object-[62%_center]"
               />
             </picture>
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream-50 sm:hidden" />
           </div>
         </div>
 
-        {/* La tarjeta cubre la sección entera, del mismo tamaño que la foto */}
-        <div className="relative bg-white/85 backdrop-blur-md sm:bg-white/75">
+        {/* Velo de lectura: más ligero arriba, donde está la foto */}
+        <div className="relative bg-gradient-to-b from-white/72 via-white/90 to-white/92 backdrop-blur-md sm:bg-white/75 sm:bg-none">
           <div className="container-site py-16 sm:py-24">
             <div className="text-center">
               <p className="slash-gold !text-red-700">Servicio de urgencias</p>
@@ -373,10 +380,10 @@ export default async function LandingPage() {
 
       {/* ═══ INGENIERÍA ═══════════════════════════════════════ */}
       <section id="ingenieria" className="anchor relative overflow-hidden py-16 sm:py-24">
-        {/* Igual que en urgencias: la foto se queda a la altura de la pantalla
-            para no tener que ampliarla hasta cubrir toda la sección */}
+        {/* Mismo tratamiento que en urgencias: banda superior en móvil para no
+            ampliar la foto hasta cubrir 1600px de alto */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="sticky top-0 h-svh w-full">
+          <div className="sticky top-0 h-[42svh] w-full sm:h-svh">
             <picture>
               <source
                 type="image/avif"
@@ -399,11 +406,15 @@ export default async function LandingPage() {
                 className="h-full w-full object-cover"
               />
             </picture>
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-cream-50 sm:hidden" />
           </div>
         </div>
 
-        {/* Mismo velo que en urgencias: el texto se lee sin necesidad de tarjeta */}
-        <div aria-hidden className="absolute inset-0 bg-white/85 backdrop-blur-md sm:bg-white/75" />
+        {/* Velo de lectura: más ligero arriba, donde está la foto */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-white/72 via-white/90 to-white/92 backdrop-blur-md sm:bg-white/75 sm:bg-none"
+        />
 
         <div className="container-site relative">
           <div className="mx-auto max-w-3xl text-center">

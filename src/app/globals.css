@@ -204,9 +204,19 @@
    el texto se ajusta al ancho de la celda; nunca baja de 44px de alto
    (objetivo táctil cómodo). */
 .filter-chip {
-  @apply rounded-2xl border border-noir/15 bg-white px-2 py-2 text-[12.5px] font-bold leading-tight text-noir transition-all duration-200;
+  @apply rounded-2xl border border-noir/15 bg-white px-1 py-2 text-[12px] font-bold leading-tight text-noir transition-all duration-200;
   min-height: 44px;
-  hyphens: auto;
+  /* Nunca partir palabras con guion ("zonas de co-bertura"): si una no cabe,
+     que salte entera a la línea siguiente. En pantallas de 320px la celda
+     mide 90px, así que el margen interior se reduce para que quepan palabras
+     largas como "Mantenimiento". */
+  hyphens: none;
+  overflow-wrap: normal;
+}
+@media (min-width: 360px) {
+  .filter-chip {
+    @apply px-2 text-[12.5px];
+  }
 }
 @media (min-width: 640px) {
   .filter-chip {

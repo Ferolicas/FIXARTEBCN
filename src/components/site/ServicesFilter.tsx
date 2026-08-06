@@ -43,7 +43,7 @@ export function ServicesFilter({
       <div
         role="group"
         aria-label="Elige un servicio"
-        className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center"
+        className="grid grid-cols-2 gap-2 min-[360px]:grid-cols-3 sm:flex sm:flex-wrap sm:justify-center"
       >
         {services.map((s, i) => (
           <button
