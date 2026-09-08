@@ -311,11 +311,11 @@
   .fa-brand-copy strong { font-size: 17px; }
   .fa-brand-copy small { display: none; }
   .fa-theme-toggle, .fa-menu-trigger { width: 40px; height: 40px; }
-  .fa-hero { height: auto; min-height: 780px; padding: 150px 0 76px; align-items: end; }
+  .fa-hero { height: auto; min-height: 780px; padding: 92px 0 76px; align-items: start; }
   .fa-hero-media img { object-position: 68% center; }
   .fa-hero-shade { background: linear-gradient(0deg, rgba(5,16,25,.99) 7%, rgba(5,16,25,.91) 48%, rgba(5,16,25,.45) 100%); }
   .fa-blueprint-grid { opacity: .11; mask-image: linear-gradient(0deg, #000, transparent 74%); }
-  .fa-hero-grid { padding-top: 200px; }
+  .fa-hero-grid { padding-top: 10px; }
   .fa-hero h1 { max-width: 360px; font-size: clamp(3rem, 14.1vw, 4.25rem); line-height: .92; }
   .fa-hero-lead { margin-top: 22px; font-size: 15px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .fa-hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
