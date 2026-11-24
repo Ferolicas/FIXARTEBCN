@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createReadStream, existsSync, statSync } from "fs";
 import path from "path";
 import { Readable } from "stream";
-import { uploadsDir } from "@/lib/uploads";
+import { resolveUpload } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +16,9 @@ const TYPES: Record<string, string> = {
 
 export async function GET(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
   const { path: parts } = await ctx.params;
-  const abs = path.join(uploadsDir(), parts.join("/"));
-
   // Nunca servir fuera de la carpeta de subidas
-  if (!abs.startsWith(uploadsDir()) || !existsSync(abs) || !statSync(abs).isFile()) {
+  const abs = resolveUpload(parts.join("/"));
+  if (!abs || !existsSync(abs) || !statSync(abs).isFile()) {
     return new NextResponse("Not found", { status: 404 });
   }
 

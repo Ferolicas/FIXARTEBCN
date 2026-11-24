@@ -7,6 +7,18 @@ export function uploadsDir(): string {
   return path.resolve(process.env.UPLOADS_DIR || "./uploads");
 }
 
+/**
+ * Resuelve una ruta relativa dentro de la carpeta de subidas. Devuelve null si
+ * el resultado cae fuera de ella. La comparación exige el separador final:
+ * con un simple startsWith(raíz), "../uploads-otra/x.png" pasaría el filtro
+ * porque "/srv/uploads-otra" también empieza por "/srv/uploads".
+ */
+export function resolveUpload(rel: string): string | null {
+  const root = uploadsDir();
+  const abs = path.resolve(root, rel);
+  return abs.startsWith(root + path.sep) ? abs : null;
+}
+
 const MAX_BYTES = 12 * 1024 * 1024;
 
 /**
@@ -44,10 +56,9 @@ export async function saveImage(file: File, subdir: "servicios" | "trabajos" | "
 /** Borra un archivo subido a partir de su ruta pública. Ignora errores. */
 export async function deleteUpload(publicPath: string) {
   if (!publicPath.startsWith("/uploads/")) return;
-  const rel = publicPath.slice("/uploads/".length);
-  const abs = path.join(uploadsDir(), rel);
   // Nunca salir de la carpeta de subidas
-  if (!abs.startsWith(uploadsDir())) return;
+  const abs = resolveUpload(publicPath.slice("/uploads/".length));
+  if (!abs) return;
   try {
     await unlink(abs);
   } catch {}
