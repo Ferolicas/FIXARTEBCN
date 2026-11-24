@@ -1,7 +1,7 @@
 import { mkdir, writeFile, unlink } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import sharp from "sharp";
+import sharp, { type Sharp } from "sharp";
 
 export function uploadsDir(): string {
   return path.resolve(process.env.UPLOADS_DIR || "./uploads");
@@ -20,7 +20,7 @@ export async function saveImage(file: File, subdir: "servicios" | "trabajos" | "
 
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  let pipeline: sharp.Sharp;
+  let pipeline: Sharp;
   try {
     pipeline = sharp(buffer, { failOn: "error" }).rotate();
     await pipeline.metadata();

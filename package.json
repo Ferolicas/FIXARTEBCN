@@ -20,13 +20,13 @@
     "jose": "^6.0.11",
     "lucide-react": "^1.28.0",
     "marked": "^15.0.11",
-    "next": "^15.3.3",
+    "next": "^15.5.29",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "resend": "^4.5.1",
-    "sharp": "^0.34.2",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^3.6.0",
-    "zod": "^3.25.0"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8",
